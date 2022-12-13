@@ -1,7 +1,7 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 
-a:hover, a:focus {
+a:hover, a:focus, a {
     text-decoration: none;
 }
 
@@ -9,7 +9,6 @@ nav {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    -o-user-select: none;
     user-select: none;
 }
 
@@ -31,6 +30,7 @@ ul {
 
 body {
     margin: 0;
+    background-color: #D7F1FF;
 }
 
 .header {
@@ -45,6 +45,7 @@ body {
     display: flex;
     margin: 0 25px 0 auto;
 }
+
 .bucket {
     margin-right: 20px;
 }
@@ -59,7 +60,7 @@ body {
 }
 
 .bi-basket:hover {
-    background-color: #6666;
+    background-color: #7777;
     border-radius: 7px;
 }
 
@@ -68,7 +69,7 @@ body {
 }
 
 .bi-person:hover {
-    background-color: #6666;
+    background-color: #7777;
     border-radius: 7px;
 }
 
@@ -105,7 +106,7 @@ body {
 }
 
 .button-header:hover {
-    background-color: red;
+    background-color: #83e892;
 }
 
 .fa {
@@ -126,7 +127,6 @@ body {
 .main-menu {
     background-color: #1b2024;
     border-right: 1px solid #e5e5e5;
-    position: absolute;
     top: 0;
     bottom: 0;
     height: 100%;
@@ -137,6 +137,7 @@ body {
     transition: width .05s linear;
     -webkit-transform: translateZ(0) scale(1, 1);
     z-index: 1000;
+    position: fixed;
 }
 
 .main-menu > ul {
@@ -199,4 +200,47 @@ body {
     background: #e2e2e2;
     width: 100%;
     height: 100%;
+}
+
+.product {
+    margin: 10px 70px 10px 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.content-categories {
+    height: 300px;
+    width: 300px;
+    background-color: #1b2024;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.categories-img {
+    width: calc(100% - 5%);
+    height: calc(100% - 20%);
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.img-cat {
+    width: 100%;
+    align-self: center;
+    border-radius: 10px;
+}
+
+.text-cat {
+    color: #D7F1FF;
+    font-size: 24px;
+}
+
+.content-categories:hover {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: 1s
 }

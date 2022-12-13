@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponse
+from .models import *
 
 
 def home(request):
-    return render(request, 'base.html')
+    categories = Categories.objects.all()
+    return render(request, 'main.html', {"categories": categories})
