@@ -217,6 +217,7 @@ body {
     margin-left: 10px;
     margin-top: 10px;
     border-radius: 10px;
+    transition: 0.3s;
 }
 
 .categories-img {
@@ -234,13 +235,16 @@ body {
 }
 
 .text-cat {
-    color: #D7F1FF;
     font-size: 24px;
+    color: #D7F1FF;
+}
+.content-categories:hover .text-cat {
+    color: #accae8;
+    transition: 0.3s;
 }
 
 .content-categories:hover {
     -webkit-transform: scale(1.1);
     -ms-transform: scale(1.1);
     transform: scale(1.1);
-    transition: 1s
 }

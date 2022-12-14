@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="product">
-        {% for cat in categories %}
+        {% for prod in product %}
             <div class="content-categories">
-                <a href="{{ cat.get_absolute_url }}">
+                <a href="#">
                     <div class="categories-img">
-                        {% if cat.photo %}
-                            <img class="img-cat" src="{{ cat.photo.url }}">
+                        {% if prod.photo %}
+                            <img class="img-cat" src="{{ prod.photo.url }}">
                         {% endif %}
                     </div>
                     <div class="text-cat">
-                        {{ cat.name }}
+                        {{ prod.name }}
                     </div>
                 </a>
             </div>

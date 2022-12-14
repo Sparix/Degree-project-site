@@ -5,7 +5,8 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('', home, name='home')
+    path('', CategoriesHome.as_view(), name='home'),
+    path('product/<slug:cat_slug>/', ProductHome.as_view(), name='category'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
