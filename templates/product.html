@@ -2,15 +2,16 @@
 {% block content %}
     <div class="product">
         {% for prod in product %}
-            <div class="content-categories">
-                <a href="#">
-                    <div class="categories-img">
-                        {% if prod.photo %}
-                            <img class="img-cat" src="{{ prod.photo.url }}">
-                        {% endif %}
+            <div class="content-product">
+                <a href="{{ cat.get_absolute_url }}">
+                    <div class="img-product">
+                        <img class="img-prod" src="{{ prod.photo.url }}">
                     </div>
-                    <div class="text-cat">
+                    <div class="text-prod">
                         {{ prod.name }}
+                    </div>
+                    <div class="cost-prod">
+                        {{ prod.cost }}
                     </div>
                 </a>
             </div>

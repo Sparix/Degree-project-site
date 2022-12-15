@@ -2,11 +2,11 @@
 {% block content %}
     <div class="product">
         {% for cat in categories %}
-            <div class="content-categories">
+            <div class="content-product prod">
                 <a href="{{ cat.get_absolute_url }}">
-                    <div class="categories-img">
+                    <div class="img-product">
                         {% if cat.photo %}
-                            <img class="img-cat" src="{{ cat.photo.url }}">
+                            <img class="img-prod" src="{{ cat.photo.url }}">
                         {% endif %}
                     </div>
                     <div class="text-cat">

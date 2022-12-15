@@ -210,8 +210,8 @@ body {
     text-align: center;
 }
 
-.content-categories {
-    height: 300px;
+.content-product {
+    height: 400px;
     width: 300px;
     background-color: #1b2024;
     margin-left: 10px;
@@ -220,31 +220,51 @@ body {
     transition: 0.3s;
 }
 
-.categories-img {
-    width: calc(100% - 5%);
-    height: calc(100% - 20%);
-    margin: 0 auto;
-    box-sizing: border-box;
-    display: flex;
-}
-
-.img-cat {
-    width: 100%;
-    align-self: center;
-    border-radius: 10px;
-}
-
-.text-cat {
-    font-size: 24px;
-    color: #D7F1FF;
-}
-.content-categories:hover .text-cat {
+.content-product:hover .text-cat {
     color: #accae8;
     transition: 0.3s;
 }
 
-.content-categories:hover {
-    -webkit-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);
+.content-product:hover {
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+}
+.img-product {
+    height: 250px;
+    max-width: 290px;
+    background-color: white;
+    margin-left: 5px;
+    margin-top: 5px;
+    border-radius: 7px;
+}
+.img-prod {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.cost-prod {
+    font-size: 24px;
+    text-align: center;
+    color: #e84254;
+    margin-top: 20px;
+}
+.cost-prod:after {
+    content: '₴';
+    margin-left: -5px;
+}
+.text-cat {
+    font-size: 24px;
+    color: #D7F1FF;
+    margin-top: 30px;
+
+}
+.text-prod {
+    font-size: 18px;
+    color: #D7F1FF;
+    margin-top: 10px;
+}
+
+.prod {
+    height: 350px;
 }
