@@ -29,3 +29,17 @@ class ProductHome(ListView):
         context = super().get_context_data(**kwargs)
         return context
 
+
+class AboutProduct(DetailView):
+    model = Product
+    template_name = "test.html"
+    slug_url_kwarg = "product_slug"
+    context_object_name = 'product'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+def test(request):
+    return render(request, 'register.html')
