@@ -3,7 +3,7 @@
     <div class="product">
         {% for prod in product %}
             <div class="content-product">
-                <a href="{{ prod.get_absolute_url }}">
+                <a href="{{ cat.get_absolute_url }}">
                     <div class="img-product">
                         <img class="img-prod" src="{{ prod.photo.url }}">
                     </div>
