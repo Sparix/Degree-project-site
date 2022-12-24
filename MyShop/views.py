@@ -17,15 +17,29 @@ class CategoriesHome(ListView):
 
 
 class ProductHome(ListView):
-    model = Product
+    model = Motherboard
     template_name = 'product.html'
     context_object_name = 'product'
     allow_empty = False
 
     def get_queryset(self):
-        return Product.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
+        return Motherboard.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
 
+
+class AboutProduct(DetailView):
+    model = Motherboard
+    template_name = "test.html"
+    slug_url_kwarg = "product_slug"
+    context_object_name = 'product'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+def test(request):
+    return render(request, 'register.html')
