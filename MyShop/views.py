@@ -1,4 +1,7 @@
 from django.shortcuts import render, HttpResponse
+from django.urls import reverse_lazy
+
+from .forms import RegisterUserForm
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView
 
@@ -41,5 +44,15 @@ class AboutProduct(DetailView):
         return context
 
 
-def test(request):
-    return render(request, 'register.html')
+class RegisterUser(CreateView):
+    form_class = RegisterUserForm
+    template_name = 'register.html'
+    success_url = reverse_lazy('login')
+
+    def get_context_data(self, *, object_list=None,**kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+def login(request):
+    return render(request, 'login.html')

@@ -277,7 +277,7 @@ body {
 
 .form-acc {
     margin-top: 80px;
-    margin-left: 30%;
+    margin-left: 33%;
     background-color: #1b2024;
     width: 650px;
     height: 400px;
@@ -456,4 +456,60 @@ body {
 
 .value:hover {
     color: #c2c800
+}
+.label-inp {
+    height: 40px;
+    width: 300px;
+    border-radius: 7px;
+    outline: none;
+    border: none;
+    background-color: #D7F1FF;
+    color: #1b2024;
+    display: block;
+    margin-top: 15px;
+    font-size: 20px;
+    text-align: center;
+}
+.inp-acc {
+    margin-left: 175px;
+    margin-right: auto;
+}
+.button-reg {
+    margin-top: 40px;
+    margin-left: 75px;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #D7F1FF;
+    color: #1b2024;
+    outline: none;
+    border: none;
+    transition: 0.3s;
+}
+
+.button-reg:hover {
+    background-color: red;
+    color: #D7F1FF;
+}
+.have-acc {
+    color: #D7F1FF;
+    margin-top: 45px;
+    margin-left: 60px;
+}
+.login-reg {
+    color: red;
+    padding: 3px;
+    display: flex;
+    transition: 0.5s;
+}
+.login-reg:hover {
+    color: #00D7FF;
+}
+.tester {
+    color: #00D7FF;
+    margin-right: 3px;
+    transition: 0.5s;
+}
+.tester:hover {
+    color: #D7F1FF;
 }

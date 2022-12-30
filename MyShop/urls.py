@@ -8,7 +8,8 @@ urlpatterns = [
     path('', CategoriesHome.as_view(), name='home'),
     path('product/<slug:cat_slug>/', ProductHome.as_view(), name='category'),
     path('<slug:product_slug>/', AboutProduct.as_view(), name='product'),
-    path('test', test, name='register')
+    path('register', RegisterUser.as_view(), name='register'),
+    path('login', login, name='login'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
