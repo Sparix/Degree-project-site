@@ -1,7 +1,9 @@
-from django.shortcuts import render, HttpResponse
+from django.contrib.auth.views import LoginView
+from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse_lazy
+from django.contrib.auth import logout
 
-from .forms import RegisterUserForm
+from .forms import RegisterUserForm, LoginUserForm
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView
 
@@ -35,7 +37,7 @@ class ProductHome(ListView):
 
 class AboutProduct(DetailView):
     model = Motherboard
-    template_name = "test.html"
+    template_name = "forproducts.html"
     slug_url_kwarg = "product_slug"
     context_object_name = 'product'
 
@@ -49,10 +51,27 @@ class RegisterUser(CreateView):
     template_name = 'register.html'
     success_url = reverse_lazy('login')
 
-    def get_context_data(self, *, object_list=None,**kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
 
 
-def login(request):
-    return render(request, 'login.html')
+class LoginUser(LoginView):
+    form_class = LoginUserForm
+    template_name = 'login.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('profile')
+
+
+def profile(request):
+    return render(request, 'account.html')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')

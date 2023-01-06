@@ -375,6 +375,7 @@ body {
 
 .tov_description {
     margin-left: 40px;
+    margin-bottom: 40px;
 }
 
 .parameters {
@@ -465,18 +466,15 @@ body {
     border: none;
     background-color: #D7F1FF;
     color: #1b2024;
-    display: block;
-    margin-top: 15px;
     font-size: 20px;
     text-align: center;
 }
 .inp-acc {
-    margin-left: 175px;
+    margin-left: 70px;
     margin-right: auto;
 }
 .button-reg {
-    margin-top: 40px;
-    margin-left: 75px;
+    margin-left: 200px;
     width: 150px;
     height: 40px;
     border-radius: 5px;
@@ -493,8 +491,8 @@ body {
 }
 .have-acc {
     color: #D7F1FF;
-    margin-top: 45px;
-    margin-left: 60px;
+    margin-top: 30px;
+    margin-left: 170px;
 }
 .login-reg {
     color: red;
@@ -512,4 +510,21 @@ body {
 }
 .tester:hover {
     color: #D7F1FF;
+}
+
+.log {
+    margin-left: -50px;
+}
+.reg-label {
+    outline: none;
+    border: none;
+    display: inline-block;
+    min-width: 115px;
+}
+.error-reg {
+    color: red;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: -30px;
+    margin-left: 50px;
 }

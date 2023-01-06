@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div class="error-reg">
+    {{ form.non_field_errors }}
+    </div>
     <div class="form-acc">
         <div class="account-head">
             <p style="font-size: 24px; margin-bottom: -10px;">Регистрація</p>
@@ -7,14 +10,18 @@
             <hr color="#E0FFF" size="1px">
         </div>
         <div class="inp-acc">
-            <input type="text" class="label-inp" placeholder="Введіть username">
-            <input type="password" class="label-inp" placeholder="Введіть Пароль">
-            <button class="button-reg">Зареєструватися</button>
-            <div class="have-acc">
-                <a href="{% url 'register' %}" class="login-reg">
-                    <div class="tester">В мене вже э аккаунт</div>
-                    Ввійти</a>
-            </div>
+            <form method="post">
+                {% csrf_token %}
+                {% for f in form %}
+                    <p><label class="reg-label" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
+                {% endfor %}
+                <button class="button-reg">Ввійти</button>
+                <div class="have-acc">
+                    <a href="{% url 'register' %}" class="login-reg log">
+                        <div class="tester">В мене ще немає аккаунта</div>
+                        Зареєструватися</a>
+                </div>
+            </form>
         </div>
     </div>
 {% endblock %}

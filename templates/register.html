@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div class="error-reg">
+    {% for er in form %}
+        {{ er.errors }}
+    {% endfor %}
+    </div>
     <div class="form-acc">
         <div class="account-head">
             <p style="font-size: 24px; margin-bottom: -10px;">Регистрація</p>
@@ -9,15 +14,10 @@
         <div class="inp-acc">
             <form method="post">
                 {% csrf_token %}
-                {{ form.username.error }}
-                {{ form.password1.error }}
-                {{ form.passwrod2.error }}
-                <label for="{{ form.username.id_for_label }}"></label>
-                <input type="text" class="label-inp" placeholder="{{ form.username.label }}">
-                <label for="{{ form.password1.id_for_label }}"></label>
-                <input type="password" class="label-inp" placeholder="{{ form.password1.label }}">
-                <label for="{{ form.password2.id_for_label }}"></label>
-                <input type="password" class="label-inp" placeholder="{{ form.password2.label }}">
+                {% for f in form %}
+                    <p><label class="reg-label" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
+                {% endfor %}
+
                 <button type="submit" class="button-reg">Зареєструватися</button>
                 <div class="have-acc">
                     <a href="{% url 'login' %}" class="login-reg">
