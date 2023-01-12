@@ -35,7 +35,7 @@
                         <div class="value_list">
                             <div class="rapam_value">
                                 <div class="value_article">
-                                    Виробник
+                                    {{ form.manufactured.help_text }}
                                 </div>
                                 <div class="value">
                                     {{ product.manufactured }}
@@ -43,7 +43,7 @@
                             </div>
                             <div class="rapam_value">
                                 <div class="value_article">
-                                    Платформа
+                                    {{ form.platforms.help_text }}
                                 </div>
                                 <div class="value">
                                     {{ product.platforms }}
@@ -51,7 +51,7 @@
                             </div>
                             <div class="rapam_value">
                                 <div class="value_article">
-                                    Роз'єм (Socket)
+                                    {{ form.sockets.help_text }}
                                 </div>
                                 <div class="value">
                                     {{ product.sockets }}
@@ -59,7 +59,7 @@
                             </div>
                             <div class="rapam_value">
                                 <div class="value_article">
-                                    Форм-фактор
+                                    {{ form.form_factor.help_text }}
                                 </div>
                                 <div class="value">
                                     {{ product.form_factor }}
@@ -67,7 +67,7 @@
                             </div>
                             <div class="rapam_value">
                                 <div class="value_article">
-                                    Чіпсет
+                                    {{ form.chipsets.help_text }}
                                 </div>
                                 <div class="value">
                                     {{ product.chipsets }}
@@ -75,7 +75,7 @@
                             </div>
                             <div class="rapam_value">
                                 <div class="value_article">
-                                    Кількість фаз живлення
+                                    {{ form.power_phase.help_text }}
                                 </div>
                                 <div class="value">
                                     {{ product.power_phase }}
@@ -86,7 +86,7 @@
                             </div>
                             <div class="rapam_value">
                                 <div class="value_article">
-                                    Тип пам’яті
+                                    {{ form.memory_type.help_text }}
                                 </div>
                                 <div class="value">
                                     {{ product.memory_type }}
@@ -94,7 +94,7 @@
                             </div>
                             <div class="rapam_value">
                                 <div class="value_article">
-                                    Кількість слотів
+                                    {{ form.slots.help_text }}
                                 </div>
                                 <div class="value">
                                     {{ product.slots }}
@@ -102,7 +102,7 @@
                             </div>
                             <div class="rapam_value">
                                 <div class="value_article">
-                                    Максимальна чистота
+                                    {{ form.frequency.help_text }}
                                 </div>
                                 <div class="value">
                                     {{ product.frequency }}
@@ -110,7 +110,7 @@
                             </div>
                             <div class="rapam_value">
                                 <div class="value_article">
-                                    Максимальный обсяг
+                                    {{ form.max_volume.help_text }}
                                 </div>
                                 <div class="value">
                                     {{ product.max_volume }}

@@ -15,7 +15,7 @@
             <form method="post">
                 {% csrf_token %}
                 {% for f in form %}
-                    <p><label class="reg-label" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
+                    <p><label class="reg-label" for="{{ f.id_for_label }}"></label>{{ f }}</p>
                 {% endfor %}
 
                 <button type="submit" class="button-reg">Зареєструватися</button>

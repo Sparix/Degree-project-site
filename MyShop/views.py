@@ -3,7 +3,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
 
-from .forms import RegisterUserForm, LoginUserForm
+from .forms import *
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView
 
@@ -35,7 +35,8 @@ class ProductHome(ListView):
         return context
 
 
-class AboutProduct(DetailView):
+class AboutProduct(CreateView, DetailView):
+    form_class = ProductAbout
     model = Motherboard
     template_name = "forproducts.html"
     slug_url_kwarg = "product_slug"
@@ -68,10 +69,16 @@ class LoginUser(LoginView):
         return reverse_lazy('profile')
 
 
-def profile(request):
-    return render(request, 'account.html')
+class AddProduct(CreateView):
+    form_class = AddProductForm
+    template_name = 'staff_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 def logout_user(request):
     logout(request)
     return redirect('home')
+

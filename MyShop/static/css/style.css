@@ -458,6 +458,7 @@ body {
 .value:hover {
     color: #c2c800
 }
+
 .label-inp {
     height: 40px;
     width: 300px;
@@ -469,12 +470,13 @@ body {
     font-size: 20px;
     text-align: center;
 }
+
 .inp-acc {
-    margin-left: 70px;
-    margin-right: auto;
+    text-align: center;
 }
+
 .button-reg {
-    margin-left: 200px;
+    text-align: center;
     width: 150px;
     height: 40px;
     border-radius: 5px;
@@ -489,25 +491,30 @@ body {
     background-color: red;
     color: #D7F1FF;
 }
+
 .have-acc {
     color: #D7F1FF;
     margin-top: 30px;
-    margin-left: 170px;
 }
+
 .login-reg {
     color: red;
     padding: 3px;
     display: flex;
     transition: 0.5s;
+    justify-content: center;
 }
+
 .login-reg:hover {
     color: #00D7FF;
 }
+
 .tester {
     color: #00D7FF;
     margin-right: 3px;
     transition: 0.5s;
 }
+
 .tester:hover {
     color: #D7F1FF;
 }
@@ -515,16 +522,160 @@ body {
 .log {
     margin-left: -50px;
 }
+
 .reg-label {
     outline: none;
     border: none;
     display: inline-block;
-    min-width: 115px;
 }
+
 .error-reg {
     color: red;
     text-align: center;
     margin-top: 30px;
     margin-bottom: -30px;
     margin-left: 50px;
+}
+
+.account-person {
+    background-color: #1b2024;
+    margin-left: 70px;
+    width: 300px;
+    height: 650px;
+    color: #D7F1FF;
+    padding-top: 10px;
+}
+
+.person {
+    color: #1b2024;
+    text-align: center;
+    padding: 10px 10px;
+    margin: 0 10px 10px 10px;
+    background-color: #00D7FF;
+    justify-content: center;
+    border-radius: 7px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.person:hover {
+    background-color: #00abce;
+}
+
+.active_acc {
+    background-color: #D7F1FF;
+    border-radius: 7px;
+    font-size: 18px;
+    transition: 0.3s;
+    color: #1b2024;
+    text-align: center;
+    padding: 10px 10px;
+    margin: 0 10px 10px 10px;
+}
+
+.content-acc {
+    background-color: #1b2024;
+    width: 75%;
+    margin: 10px;
+    color: #D7F1FF;
+    border-radius: 20px;
+}
+
+.try {
+    display: flex;
+}
+
+.form-add-prod {
+    text-align: center;
+    color: #D7F1FF;
+    font-size: 32px;
+}
+
+.scroll-form {
+    height: 480px;
+    width: 400px;
+    border-radius: 30px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.test-form {
+    text-align: center;
+}
+
+.button-form {
+    text-align: center;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #D7F1FF;
+    color: #1b2024;
+    outline: none;
+    border: none;
+    transition: 0.3s;
+    margin-top: 40px;
+}
+.button-form:hover {
+    background-color: red;
+    color: #D7F1FF;
+}
+
+#scroll-view {
+    overflow-y: scroll;
+}
+
+#scroll-view::-webkit-scrollbar {
+    width: 15px;
+    background-color: #1b2024;
+}
+
+#scroll-view::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #00D7FF;
+}
+
+#scroll-view::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #D7F1FF;
+}
+
+.choice-select {
+    height: 40px;
+    width: 300px;
+    border-radius: 7px;
+    outline: none;
+    border: none;
+    background-color: #D7F1FF;
+    color: #1b2024;
+    font-size: 20px;
+    text-align: center;
+}
+
+.published-form {
+    background-color: #D7F1FF;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    margin-left: 40px;
+}
+
+.image-form {
+    height: 40px;
+    width: 300px;
+    border-radius: 7px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: #D7F1FF;
+    padding: 10px 0 0 10px;
+}
+
+.text-area {
+    width: 300px;
+    height: 200px;
+    background-color: #E0FFFF;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    resize: none;
 }

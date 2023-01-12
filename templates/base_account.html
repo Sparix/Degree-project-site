@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="try">
+        <div class="account-person">
+            <div class="active_acc">
+                Ім'я: {{ user.get_username }}
+            </div>
+            <hr color="red">
+            <div class="person">
+                Мої замовлення
+            </div>
+            <div class="person">
+                Список бажань
+            </div>
+            <div class="person">
+                Переглянуті товари
+            </div>
+            {% if request.user.is_staff %}
+                <div class="person">
+                    Добавить товар
+                </div>
+            {% endif %}
+        </div>
+        <div class="content-acc">
+            {% block prod %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
