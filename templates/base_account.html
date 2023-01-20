@@ -2,24 +2,31 @@
 {% block content %}
     <div class="try">
         <div class="account-person">
-            <div class="active_acc">
-                Ім'я: {{ user.get_username }}
-            </div>
-            <hr color="red">
-            <div class="person">
-                Мої замовлення
-            </div>
-            <div class="person">
-                Список бажань
-            </div>
-            <div class="person">
-                Переглянуті товари
-            </div>
-            {% if request.user.is_staff %}
+            <a href={% url 'cabinet' %}>
+                <div class="person {% block cabinet %} {% endblock %}">
+                    Ім'я: {{ user.get_username }}
+                </div>
+            </a>
+            <a href={% url 'home' %}>
                 <div class="person">
+                    Мої замовлення
+                </div>
+            </a>
+            <a href={% url 'home' %}>
+                <div class="person">
+                    Список бажань
+                </div>
+            </a>
+            <a href={% url 'home' %}>
+                <div class="person">
+                    Переглянуті товари
+                </div>
+            </a>
+            <a href={% url 'stuff_form' %}>
+                <div class="person {% block stuff_form %} {% endblock %}">
                     Добавить товар
                 </div>
-            {% endif %}
+            </a>
         </div>
         <div class="content-acc">
             {% block prod %}

@@ -30,92 +30,19 @@
                     </div>
                     <div class="parameters">
                         <div class="name_parameters">
-                            <h3>Основнi параметри</h3>
+                            <h3>Параметри</h3>
                         </div>
                         <div class="value_list">
-                            <div class="rapam_value">
-                                <div class="value_article">
-                                    {{ form.manufactured.help_text }}
+                            {% for prod, prod1 in product.content_split.items %}
+                                <div class="rapam_value">
+                                    <div class="value_article">
+                                        {{ prod }}
+                                    </div>
+                                    <div class="value">
+                                        {{ prod1 }}
+                                    </div>
                                 </div>
-                                <div class="value">
-                                    {{ product.manufactured }}
-                                </div>
-                            </div>
-                            <div class="rapam_value">
-                                <div class="value_article">
-                                    {{ form.platforms.help_text }}
-                                </div>
-                                <div class="value">
-                                    {{ product.platforms }}
-                                </div>
-                            </div>
-                            <div class="rapam_value">
-                                <div class="value_article">
-                                    {{ form.sockets.help_text }}
-                                </div>
-                                <div class="value">
-                                    {{ product.sockets }}
-                                </div>
-                            </div>
-                            <div class="rapam_value">
-                                <div class="value_article">
-                                    {{ form.form_factor.help_text }}
-                                </div>
-                                <div class="value">
-                                    {{ product.form_factor }}
-                                </div>
-                            </div>
-                            <div class="rapam_value">
-                                <div class="value_article">
-                                    {{ form.chipsets.help_text }}
-                                </div>
-                                <div class="value">
-                                    {{ product.chipsets }}
-                                </div>
-                            </div>
-                            <div class="rapam_value">
-                                <div class="value_article">
-                                    {{ form.power_phase.help_text }}
-                                </div>
-                                <div class="value">
-                                    {{ product.power_phase }}
-                                </div>
-                            </div>
-                            <div class="name_parameters">
-                                <h3>Оперативна пам’ять</h3>
-                            </div>
-                            <div class="rapam_value">
-                                <div class="value_article">
-                                    {{ form.memory_type.help_text }}
-                                </div>
-                                <div class="value">
-                                    {{ product.memory_type }}
-                                </div>
-                            </div>
-                            <div class="rapam_value">
-                                <div class="value_article">
-                                    {{ form.slots.help_text }}
-                                </div>
-                                <div class="value">
-                                    {{ product.slots }}
-                                </div>
-                            </div>
-                            <div class="rapam_value">
-                                <div class="value_article">
-                                    {{ form.frequency.help_text }}
-                                </div>
-                                <div class="value">
-                                    {{ product.frequency }}
-                                </div>
-                            </div>
-                            <div class="rapam_value">
-                                <div class="value_article">
-                                    {{ form.max_volume.help_text }}
-                                </div>
-                                <div class="value">
-                                    {{ product.max_volume }}
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

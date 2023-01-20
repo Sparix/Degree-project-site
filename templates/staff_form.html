@@ -1,18 +1,21 @@
 {% extends 'base_account.html' %}
+{% block stuff_form %}
+    active_acc
+{% endblock %}
 {% block prod %}
     <div class="form-add-prod">
-    Фома додавання товару
+        Фома додавання товару
     </div>
     <hr>
-    <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data" class="test-form">
-    {{ form.non_field_errors }}
-    {% csrf_token %}
-    <div class="scroll-form" id="scroll-view">
-    {% for prod in form %}
-        {{ prod.errors }}
-        <p><label class="reg-label" for="{{ prod.id_for_label }}"></label>{{ prod }}</p>
-    {% endfor %}
-    </div>
-     <button type="submit" class="button-form">Добавить товар</button>
+    <form method="post" enctype="multipart/form-data" class="test-form">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="scroll-form" id="scroll-view">
+            {% for prod in form %}
+                {{ prod.errors }}
+                <p><label class="reg-label" for="{{ prod.id_for_label }}"></label>{{ prod }}</p>
+            {% endfor %}
+        </div>
+        <button type="submit" class="button-form">Добавить товар</button>
     </form>
 {% endblock %}

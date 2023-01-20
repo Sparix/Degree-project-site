@@ -11,7 +11,8 @@ urlpatterns = [
     path('register', RegisterUser.as_view(), name='register'),
     path('login', LoginUser.as_view(), name='login'),
     path('logout', logout_user, name='logout'),
-    path('profile', AddProduct.as_view(), name='profile'),
+    path('stuff_form', AddProduct.as_view(), name='stuff_form'),
+    path('cabinet', profile, name='cabinet'),
 ]
 
 if settings.DEBUG:

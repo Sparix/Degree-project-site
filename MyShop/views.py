@@ -22,22 +22,21 @@ class CategoriesHome(ListView):
 
 
 class ProductHome(ListView):
-    model = Motherboard
+    model = Product
     template_name = 'product.html'
     context_object_name = 'product'
     allow_empty = False
 
     def get_queryset(self):
-        return Motherboard.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
+        return Product.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
 
 
-class AboutProduct(CreateView, DetailView):
-    form_class = ProductAbout
-    model = Motherboard
+class AboutProduct(DetailView):
+    model = Product
     template_name = "forproducts.html"
     slug_url_kwarg = "product_slug"
     context_object_name = 'product'
@@ -66,7 +65,15 @@ class LoginUser(LoginView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('profile')
+        return reverse_lazy('stuff_form')
+
+
+acc_name = [
+    {'url_name': 'home', 'content': "Мої замовлення"},
+    {'url_name': 'home', 'content': "Список бажань"},
+    {'url_name': 'home', 'content': "Переглянуті товари"},
+    {'url_name': 'stuff_form', 'content': "Добавить товар"},
+]
 
 
 class AddProduct(CreateView):
@@ -75,10 +82,18 @@ class AddProduct(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        user_menu = acc_name.copy()
+        if not self.request.user.is_staff:
+            user_menu.pop(4)
+        context['menu'] = user_menu
+        context['active'] = 'person'
         return context
+
+
+def profile(request):
+    return render(request, 'cabinet.html', {'menu': acc_name})
 
 
 def logout_user(request):
     logout(request)
     return redirect('home')
-

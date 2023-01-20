@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'MyShop.apps.MyshopConfig'
+    'MyShop.apps.MyshopConfig',
+    'polymorphic',
 ]
 
 MIDDLEWARE = [
