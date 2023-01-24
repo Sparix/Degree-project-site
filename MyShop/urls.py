@@ -7,12 +7,14 @@ from .views import *
 urlpatterns = [
     path('', CategoriesHome.as_view(), name='home'),
     path('product/<slug:cat_slug>/', ProductHome.as_view(), name='category'),
-    path('<slug:product_slug>/', AboutProduct.as_view(), name='product'),
+    path('aboutproduct/<slug:product_slug>/', AboutProduct.as_view(), name='product'),
     path('register', RegisterUser.as_view(), name='register'),
     path('login', LoginUser.as_view(), name='login'),
     path('logout', logout_user, name='logout'),
-    path('stuff_form', AddProduct.as_view(), name='stuff_form'),
-    path('cabinet', profile, name='cabinet'),
+    path('cabinet', ProfilePage.as_view(), name='cabinet'),
+    path('staff_form', AddProduct.as_view(), name='stuff_form'),
+    path('change_password', PasswordChange.as_view(), name='change_psw'),
+    path('edit_profile', update_user, name='edit_profile'),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,31 @@
+{% extends 'base_account.html' %}
+{% block cabinet %}
+    active_acc
+{% endblock %}
+{% block prod %}
+    <div class="form-add-prod">
+        Редагувати профіль
+    </div>
+    {% for er in form %}
+        {{ er.errors }}
+    {% endfor %}
+    <hr>
+    <div class="inp-acc">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for f in update_user_form %}
+                <p><label class="reg-label" for="{{ f.id_for_label }}"></label>{{ f }}</p>
+            {% endfor %}
+
+            {% for f in update_profile_form %}
+                <p><label class="reg-label" for="{{ f.id_for_label }}"></label>{{ f }}</p>
+            {% endfor %}
+            <div class="button-edit-prof">
+                <button type="submit" class="button-reg">Редагувати</button>
+                <a href="{% url 'cabinet' %}" class="return-back" style="margin-left: 10px">
+                    <div class="return-back-div">Скасувати</div>
+                </a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

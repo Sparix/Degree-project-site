@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, UserChangeForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import *
@@ -38,4 +38,42 @@ class AddProductForm(forms.ModelForm):
             'is_published': forms.CheckboxInput(attrs={'class': 'published-form'}),
             'cat': forms.Select(attrs={'class': 'choice-select'}),
             'content': forms.Textarea(attrs={'class': 'text-area'}),
+        }
+
+
+class PasswordChangingForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'label-inp', 'placeholder': 'Введіть старий пароль'}))
+    new_password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'label-inp', 'placeholder': 'Введіть новий пароль'}))
+    new_password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'label-inp', 'placeholder': 'Повторіть новий пароль'}))
+
+    class Meta:
+        model = User
+        fields = {
+            'old_password', 'new_password1', 'new_password2'
+        }
+
+
+class UserForm2(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name')
+
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'label-inp', 'placeholder': 'Введіть новий username'}),
+            'last_name': forms.TextInput(attrs={'class': 'label-inp', 'placeholder': 'Введіть фаміляю'}),
+            'first_name': forms.TextInput(attrs={'class': 'label-inp', 'placeholder': "Введіть Ім'я"}),
+            'email': forms.EmailInput(attrs={'class': 'label-inp', 'placeholder': 'Введіть Email'}),
+        }
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('avatar',)
+
+        widgets = {
+            'avatar': forms.FileInput(attrs={'class': 'image-form'}),
         }

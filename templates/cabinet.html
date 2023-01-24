@@ -1,7 +1,65 @@
 {% extends 'base_account.html' %}
+{% load static %}
 {% block cabinet %}
     active_acc
 {% endblock %}
 {% block prod %}
+    <div class="head-cabinet">
+        <div class="form-add-prod">
+            Особистий кабінет
+        </div>
+        <div class="link-edit">
+            <div class="link-color">Настройки профіля</div>
+            <div class="dropdown-content">
+                <a href="{% url 'edit_profile' %}">Редагувати профіль</a>
+                <a href="{% url 'change_psw' %}">Змінити пароль</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <hr>
+    <div class="cabinet-position">
+        <div class="img-product">
+            {% if user.userprofile.avatar %}
+                <img class="img-prod" src="{{ user.userprofile.avatar.url }}">
+            {% else %}
+                <img class="img-prod" src="{% static 'img/default.jpg' %}">
+            {% endif %}
+        </div>
+        <div class="name_cabinet">
+            <div style="margin-bottom: 10px">
+                Ім'я пользователя: {{ user.get_username }}
+            </div>
+            {% if user.first_name %}
+                <div style="margin-bottom: 10px">
+                    Ім'я: {{ user.first_name }}
+                </div>
+            {% else %}
+                <div style="margin-bottom: 10px">
+                    Ім'я: Не вказана
+                </div>
+            {% endif %}
+            {% if user.last_name %}
+                <div style="margin-bottom: 10px">
+                    Фамілія: {{ user.last_name }}
+                </div>
+            {% else %}
+                <div style="margin-bottom: 10px">
+                    Фамілія: Не вказана
+                </div>
+            {% endif %}
+            {% if user.email %}
+                <div style="margin-bottom: 10px">
+                    Email адресса: {{ user.email }}
+                </div>
+            {% else %}
+                <div style="margin-bottom: 10px">
+                    Email адресса: Не вказана
+                </div>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
