@@ -28,12 +28,11 @@ class LoginUserForm(AuthenticationForm):
 class AddProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('name', 'cost', 'manufactured', 'is_published', 'photo', 'cat', 'content')
+        fields = ('name', 'cost', 'is_published', 'photo', 'cat', 'content')
 
         widgets = {
             'name': forms.TextInput(attrs={'class': 'label-inp', 'placeholder': 'Название товара'}),
             'cost': forms.TextInput(attrs={'class': 'label-inp', 'placeholder': 'Цена товара'}),
-            'manufactured': forms.TextInput(attrs={'class': 'label-inp', 'placeholder': 'Виробник'}),
             'photo': forms.FileInput(attrs={'class': 'image-form'}),
             'is_published': forms.CheckboxInput(attrs={'class': 'published-form'}),
             'cat': forms.Select(attrs={'class': 'choice-select'}),
