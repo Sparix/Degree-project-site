@@ -12,8 +12,8 @@
                     Мої замовлення
                 </div>
             </a>
-            <a href={% url 'home' %}>
-                <div class="person">
+            <a href='{% url 'cart:cart_detail' %}'>
+                <div class="person{% block basket %} {% endblock %}">
                     Список бажань
                 </div>
             </a>

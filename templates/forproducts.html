@@ -24,9 +24,14 @@
                         {{ product.cost }}
                     </div>
                     <div class="add_cart_btn">
-                        <button class="add_btn">
-                            Додати у кошик
-                        </button>
+                        <form action="{% url 'cart:cart_add' product.slug %}" method="post">
+                            <button type="submit" class="add_btn">Добавить в корзину</button>
+                            {% for cart in cart_product_form %}
+                                {{ cart }}
+                            {% endfor %}
+                            {% csrf_token %}
+
+                        </form>
                     </div>
                     <div class="parameters">
                         <div class="name_parameters">

@@ -1,0 +1,59 @@
+{% extends 'base_account.html' %}
+{% load static %}
+{% block basket %}
+    active_acc
+{% endblock %}
+{% block prod %}
+    <div class="head-basket">
+        <li class="basket-test">Картинка</li>
+        <li class="basket-test">Товар</li>
+        <li class="basket-test">Количество товара</li>
+        <li class="basket-test">Цена товара</li>
+        <li class="basket-test">Цена за штуку</li>
+    </div>
+    <div class="scroll-basket" id="scroll-view">
+        {% for item in cart %}
+            {% with product=item.product %}
+                <div class="basket-content">
+                    <a href="{{ product.get_absolute_url }}" class="basket-pos">
+                        <img src="{{ product.photo.url }}" class="img-basket">
+                    </a>
+                    <div class="basket-pos">
+                        {{ product.name }}
+                    </div>
+                    <div class="basket-pos">
+                        <form action="{% url 'cart:cart_add' product.slug %}" method="post">
+                            <div class="quantity">
+                                {{ item.update_quantity_form.quantity }}
+                                {{ item.update_quantity_form.update }}
+                                <input class="basket-update" type="submit" value="Обновить">
+                            </div>
+                            {% csrf_token %}
+                        </form>
+                    </div>
+                    <div class="basket-pos">
+                        <div style="display: flex; justify-content: center">{{ item.total_cost }}
+                            <div style="color: red; margin-left: 3px">₴</div>
+                        </div>
+                    </div>
+                    <div class="dis-block">
+                        <div style="display: flex; justify-content: center">{{ product.cost }}
+                            <div style="color: red; margin-left: 3px">₴</div>
+                        </div>
+                    </div>
+                    <a href="{% url "cart:cart_remove" product.slug %}" class="del-basket">
+                        <div class="rem-text">
+                            <svg width="20" height="20" fill="#1b2024" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            {% endwith %}
+        {% endfor %}
+    </div>
+    <div class="basket-pos-button">
+        <button class="button-basket">Оформити заказ</button>
+    </div>
+    <div class="total-price">Ціна замовлення: {{ cart.get_total_price }}</div>
+{% endblock %}

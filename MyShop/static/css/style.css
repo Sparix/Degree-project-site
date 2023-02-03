@@ -784,3 +784,150 @@ body {
     display: flex;
     justify-content: center;
 }
+
+.basket-content {
+    background-color: #D7F1FF;
+    margin: 0 auto 20px auto;
+    width: 97%;
+    height: 150px;
+    border-radius: 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.scroll-basket {
+    height: 500px;
+    width: 97%;
+    border-radius: 30px;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.button-basket {
+    width: 200px;
+    height: 50px;
+    background-color: #D7F1FF;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    color: #1b2024;
+}
+
+.basket-pos-button {
+    justify-content: center;
+    margin-top: 10px;
+    display: flex;
+}
+
+.basket-pos {
+    padding: 10px;
+    width: 25%;
+    max-height: 130px;
+    max-width: 25%;
+    color: #1b2024;
+}
+
+.img-basket {
+    background-color: #00D7FF;
+    max-height: 126px;
+    max-width: 100%;
+}
+
+.head-basket {
+    height: 30px;
+    background-color: #D7F1FF;
+    margin: 10px 10px 0 10px;
+    border-radius: 10px;
+    display: flex;
+    color: #1b2024;
+    padding: 6px 35px 0 20px
+}
+
+.basket-test {
+    text-align: center;
+    width: 25%;
+}
+
+.remove-basket {
+    background-color: #e84254;
+    width: 30px;
+    height: 30px;
+}
+
+.dis-block {
+    width: 19%;
+    max-height: 130px;
+    max-width: 25%;
+    color: #1b2024;
+    padding-left: 30px;
+}
+
+.del-basket {
+    color: #1b2024;
+    width: 50px;
+    height: 150px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    background: linear-gradient(to right, #5fa2db, #5fa2db 50%, #00D7FF 50%);
+    -webkit-background-clip: border-box;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 1s ease;
+}
+
+.rem-text {
+    margin-top: 65px;
+}
+
+.del-basket:hover {
+    background-position: 0 100%;
+}
+
+.quantity {
+    display: flex;
+    justify-content: center;
+}
+
+.basket-update {
+    background-color: #1b2024;
+    color: #D7F1FF;
+    margin-left: 10px;
+    height: 30px;
+    width: 100px;
+    border-radius: 3px;
+    outline: none;
+    border: none;
+}
+
+.basket-update:hover {
+    color: red;
+}
+
+.let-s {
+    background-color: #1b2024;
+    color: red;
+    width: 40px;
+    height: 30px;
+    border: none;
+    outline: none;
+    text-align: center;
+    border-radius: 7px;
+}
+
+.total-price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -50px;
+    margin-right: 50px;
+    margin-left: auto;
+    color: #D7F1FF;
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+}

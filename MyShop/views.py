@@ -5,6 +5,8 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
 
+from cart.forms import CartAddProductForm
+from cart.cart import Cart
 from .forms import *
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
@@ -31,17 +33,6 @@ class ProductHome(ListView):
 
     def get_queryset(self):
         return Product.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
-
-class AboutProduct(DetailView):
-    model = Product
-    template_name = "forproducts.html"
-    slug_url_kwarg = "product_slug"
-    context_object_name = 'product'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -77,10 +68,6 @@ class AddProduct(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
-
-
-'''def profile(request):
-    return render(request, 'cabinet.html', )'''
 
 
 def logout_user(request):
@@ -132,3 +119,28 @@ def update_user(request):
 
     return render(request, 'edit_profile.html',
                   {'update_user_form': update_user_form, 'update_profile_form': update_profile_form})
+
+
+def product_detail(request, product_slug):
+    product = get_object_or_404(Product,
+                                slug=product_slug,
+                                is_published=True)
+    cart_product_form = CartAddProductForm()
+    return render(request, 'forproducts.html', {'product': product,
+                                                'cart_product_form': cart_product_form})
+
+
+class Search(ListView):
+    """Поиск товаров"""
+    model = Product
+    template_name = 'product.html'
+    context_object_name = 'product'
+    allow_empty = False
+
+    def get_queryset(self):
+        return Product.objects.filter(name__icontains=self.request.GET.get("search-prod"))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['search-prod'] = self.request.GET.get("search-prod")
+        return context
