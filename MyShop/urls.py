@@ -16,6 +16,7 @@ urlpatterns = [
     path('change_password', PasswordChange.as_view(), name='change_psw'),
     path('edit_profile', update_user, name='edit_profile'),
     path('search/', Search.as_view(), name='search'),
+    path('filter/<slug:cat_slug>/', FilterProduct.as_view(), name='filter'),
 ]
 
 if settings.DEBUG:

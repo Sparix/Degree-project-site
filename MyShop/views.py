@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, PasswordChangeView
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
@@ -35,7 +34,14 @@ class ProductHome(ListView):
         return Product.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
 
     def get_context_data(self, *, object_list=None, **kwargs):
+        product = Product.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
+        slug = self.kwargs['cat_slug']
+        manufactured = [manuf.manufactured for manuf in product]
         context = super().get_context_data(**kwargs)
+        context['manufactured'] = sorted(set(manufactured))
+        context['slug'] = slug
+        context['price_from'] = 0
+        context['price_to'] = 256000
         return context
 
 
@@ -133,14 +139,59 @@ def product_detail(request, product_slug):
 class Search(ListView):
     """Поиск товаров"""
     model = Product
-    template_name = 'product.html'
+    template_name = 'search.html'
     context_object_name = 'product'
     allow_empty = False
 
     def get_queryset(self):
-        return Product.objects.filter(name__icontains=self.request.GET.get("search-prod"))
+        search = Product.objects.filter(name__icontains=self.request.GET.get("search-prod"))
+
+        if len(search) == 0:
+            return ' '
+        else:
+            return search
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['search-prod'] = self.request.GET.get("search-prod")
         return context
+
+
+class FilterProduct(ListView):
+    model = Product
+    template_name = 'product.html'
+    context_object_name = 'product'
+    allow_empty = False
+
+    def get_queryset(self):
+        price_from = self.request.GET.get('price_from', float(0))
+        price_to = self.request.GET.get('price_to', float(256000))
+        manufactured = [manuf.manufactured for manuf in
+                        Product.objects.filter(is_published=True, cat__slug=self.kwargs['cat_slug'])]
+        brand = self.request.GET.getlist('brand', manufactured)
+        prod = Product.objects.filter(is_published=True, cat__slug=self.kwargs['cat_slug'],
+                                      manufactured__in=brand).filter(
+            cost__gte=price_from).filter(cost__lte=price_to)
+        if len(prod) == 0:
+            return ' '
+        else:
+            return prod
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        slug = self.kwargs['cat_slug']
+        price_from = self.request.GET.get('price_from', float(0))
+        price_to = self.request.GET.get('price_to', float(256000))
+        product = Product.objects.filter(is_published=True, cat__slug=self.kwargs['cat_slug'])
+        brands = [manuf.manufactured for manuf in product]
+        brand = set(self.request.GET.getlist('brand', brands))
+        manufactured = [manuf.manufactured for manuf in product]
+        context = super().get_context_data(**kwargs)
+        context['price_from'] = price_from
+        context['price_to'] = price_to
+        context['slug'] = slug
+        context['brand'] = brand
+        context['manufactured'] = sorted(set(manufactured))
+        return context
+
+    def get_object(self):
+        return get_object_or_404(User, pk=self.request.user.id)

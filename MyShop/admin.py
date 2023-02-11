@@ -18,14 +18,14 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'get_html_photo', 'is_published', 'cost', 'content')
+    list_display = ('id', 'name', 'get_html_photo', 'is_published', 'cost', 'content', 'manufactured')
     list_display_links = ('id', 'name',)
     search_fields = ('name', 'cost', 'content')
     list_editable = ('is_published',)
     list_filter = ('is_published', 'name')
     prepopulated_fields = {"slug": ("name",)}
     fields = (
-        'name', 'slug', 'cat', 'photo', 'is_published', 'cost', 'content',)
+        'name', 'slug', 'cat', 'photo', 'is_published', 'cost', 'content', 'manufactured')
     readonly_fields = ('get_html_photo',)
     save_on_top = True
 

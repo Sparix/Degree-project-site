@@ -20,7 +20,7 @@ class Categories(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, db_index=True)
-    manufactured = models.CharField(max_length=100, help_text="Виробник")
+    manufactured = models.CharField(max_length=100, db_index=True)
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/")
     is_published = models.BooleanField(default=True)
     cat = models.ForeignKey('Categories', on_delete=models.PROTECT)

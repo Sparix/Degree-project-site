@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="product">
+        {% for prod in product %}
+            {% if prod != ' ' %}
+                <div class="content-product">
+                    <a href="{{ prod.get_absolute_url }}">
+                        <div class="img-product">
+                            <img class="img-prod" src="{{ prod.photo.url }}">
+                        </div>
+                        <div class="text-prod">
+                            {{ prod.name }}
+                        </div>
+                        <div class="cost-prod">
+                            {{ prod.cost }}
+                        </div>
+                    </a>
+                </div>
+            {% else %}
+                <div class="error-search">Продукта не знайдено</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

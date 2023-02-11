@@ -1,20 +1,78 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="product">
-        {% for prod in product %}
-            <div class="content-product">
-                <a href="{{ prod.get_absolute_url }}">
-                    <div class="img-product">
-                        <img class="img-prod" src="{{ prod.photo.url }}">
-                    </div>
-                    <div class="text-prod">
-                        {{ prod.name }}
-                    </div>
-                    <div class="cost-prod">
-                        {{ prod.cost }}
-                    </div>
-                </a>
+    {% load static %}
+    <div style="display: flex">
+        <div class="filter-prod">
+            <div class="filter-info">
+                Фільтр
             </div>
-        {% endfor %}
+            <hr color="#E0FFF">
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
+            <script src={% static 'Js/java-script.js' %}></script>
+
+            <div class="info-text">
+                Ціна
+            </div>
+            <form method="get" action="{% url "filter" slug %}">
+                <div class="easy-basket-filter">
+                    <div class="easy-basket-filter-info">
+                        <p class="iLower"><input type="text" name="price_from" class="easy-basket-lower"
+                                                 value="{{ price_from }}" min="0" max="256000"
+                                                 maxlength=6/></p>
+                        <p class="iUpper"><input type="text" name="price_to" class="easy-basket-upper"
+                                                 value="{{ price_to }}" min="0"
+                                                 max="256000"
+                                                 maxlength=6/></p>
+                    </div>
+
+                    <div class="easy-basket-filter-range">
+                        <input type="range" class="lower range" step="any" min="0" max="256000" value="0"/>
+                        <input type="range" class="upper range" step="any" min="0" max="256000" value="256000"/>
+                        <div class="fill"></div>
+                    </div>
+                </div>
+                <hr color="#E0FFF">
+                <div class="info-text">
+                    Бренд
+                </div>
+                <div class="brend-product" id="scroll-view">
+                    {% for manuf in manufactured %}
+                        {% if manuf %}
+                            <div style="margin-top: 10px">
+                                <label>
+                                    <input type='checkbox' {% if manuf in brand %}checked{% endif %}
+                                           name="brand" value="{{ manuf }}">
+                                    <span></span>
+                                    {{ manuf }}
+                                </label>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <hr color="#E0FFF">
+                <input class="button-filter" type="submit" value="Ок">
+            </form>
+        </div>
+        <div class="product-tov">
+            {% for prod in product %}
+                {% if prod != ' ' %}
+                    <div class="content-product">
+                        <a href="{{ prod.get_absolute_url }}">
+                            <div class="img-product">
+                                <img class="img-prod" src="{{ prod.photo.url }}">
+                            </div>
+                            <div class="text-prod">
+                                {{ prod.name }}
+                            </div>
+                            <div class="cost-prod">
+                                {{ prod.cost }}
+                            </div>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="error-prod">Продукта з данними настройками не знайдено</div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
