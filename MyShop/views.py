@@ -153,7 +153,7 @@ class Search(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['search-prod'] = self.request.GET.get("search-prod")
+        context["search_prod"] = self.request.GET.get("search-prod")
         return context
 
 
@@ -164,14 +164,15 @@ class FilterProduct(ListView):
     allow_empty = False
 
     def get_queryset(self):
-        price_from = self.request.GET.get('price_from', float(0))
-        price_to = self.request.GET.get('price_to', float(256000))
+        price_from = self.request.GET.get('price_from', 0)
+        price_to = self.request.GET.get('price_to', 256000)
+        ordering = self.request.GET.get('ordering', '-cost')
         manufactured = [manuf.manufactured for manuf in
                         Product.objects.filter(is_published=True, cat__slug=self.kwargs['cat_slug'])]
         brand = self.request.GET.getlist('brand', manufactured)
         prod = Product.objects.filter(is_published=True, cat__slug=self.kwargs['cat_slug'],
                                       manufactured__in=brand).filter(
-            cost__gte=price_from).filter(cost__lte=price_to)
+            cost__gte=price_from).filter(cost__lte=price_to).order_by(ordering)
         if len(prod) == 0:
             return ' '
         else:
@@ -179,8 +180,8 @@ class FilterProduct(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         slug = self.kwargs['cat_slug']
-        price_from = self.request.GET.get('price_from', float(0))
-        price_to = self.request.GET.get('price_to', float(256000))
+        price_from = self.request.GET.get('price_from', 0)
+        price_to = self.request.GET.get('price_to', 256000)
         product = Product.objects.filter(is_published=True, cat__slug=self.kwargs['cat_slug'])
         brands = [manuf.manufactured for manuf in product]
         brand = set(self.request.GET.getlist('brand', brands))
@@ -192,6 +193,3 @@ class FilterProduct(ListView):
         context['brand'] = brand
         context['manufactured'] = sorted(set(manufactured))
         return context
-
-    def get_object(self):
-        return get_object_or_404(User, pk=self.request.user.id)

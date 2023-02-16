@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     {% load static %}
+    <form method="get" action="{% url "filter" slug %}">
     <div style="display: flex">
         <div class="filter-prod">
             <div class="filter-info">
@@ -13,7 +14,6 @@
             <div class="info-text">
                 Ціна
             </div>
-            <form method="get" action="{% url "filter" slug %}">
                 <div class="easy-basket-filter">
                     <div class="easy-basket-filter-info">
                         <p class="iLower"><input type="text" name="price_from" class="easy-basket-lower"
@@ -51,7 +51,6 @@
                 </div>
                 <hr color="#E0FFF">
                 <input class="button-filter" type="submit" value="Ок">
-            </form>
         </div>
         <div class="product-tov">
             {% for prod in product %}
@@ -74,5 +73,15 @@
                 {% endif %}
             {% endfor %}
         </div>
+        <div class="link-ordering">
+                <div class="link-order-color"></div>
+                <div class="dropdown-content-ordering">
+
+                    <button class="order-button" type="submit" name="ordering" value="name">За замовчуванням</button>
+                    <button class="order-button" type="submit" name="ordering" value="cost">Від дешевих до дорогих</button>
+                    <button class="order-button" type="submit" name="ordering" value="-cost">Від дорогих до дешевих</button>
+                </div>
+        </div>
     </div>
+    </form>
 {% endblock %}

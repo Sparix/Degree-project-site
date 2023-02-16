@@ -12,7 +12,8 @@
     <ul class="head-text">
         <li>
             <form action="{% url 'search' %}" method="get" class="search-form">
-                <input class="search" type="text" name="search-prod" placeholder="Введіть назву товару...">
+                <input class="search" type="text" name="search-prod"
+                       placeholder="{% if search_prod %}{{ search_prod }}{% else %}Введіть назву товару...{% endif %}">
                 <button type="submit" class="button-header"></button>
             </form>
         </li>
@@ -52,8 +53,8 @@
             <a href="{% url 'home' %}">
                 <i class="fa fa-home"></i>
                 <span class="nav-text">
-                            Категорії
-                        </span>
+                    Категорії
+                </span>
             </a>
 
         </li>
@@ -64,14 +65,13 @@
             <a href={% url 'logout' %}>
                 <i class="fa fa-power-off"></i>
                 <span class="nav-text">
-                            Logout
-                        </span>
+                    Logout
+                </span>
             </a>
         </li>
     </ul>
 </nav>
 {% block content %}
-
 {% endblock %}
 </body>
 </html>
