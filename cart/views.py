@@ -15,19 +15,18 @@ def cart_add(request, product_slug):
         cart.add(product=product,
                  quantity=cd['quantity'],
                  update_quantity=cd['update'])
-    return redirect('cart:cart_detail')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 def cart_remove(request, product_slug):
     cart = Cart(request)
     product = get_object_or_404(Product, slug=product_slug)
     cart.remove(product)
-    return redirect('cart:cart_detail')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 def cart_detail(request):
     cart = Cart(request)
-    print(request)
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(initial={'quantity': item['quantity'], 'update': True})
     return render(request, 'basket.html', {'cart': cart})

@@ -20,7 +20,7 @@
     </ul>
     <ul class="last-pos">
         <li class="bucket">
-            <a href="{% url 'cart:cart_detail' %}">
+            <a href="#popup">
                 <svg width="28" height="28" class="bi-basket"
                      viewBox="0 0 16 16">
                     <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
@@ -46,7 +46,56 @@
         </li>
     </ul>
 </div>
-<div class="area"></div>
+<div id="popup" class="popup">
+    <div class="popup__body">
+        <div class="popup__content">
+            <a href="##" class="popup__close">X</a>
+            <div class="popup__title">Кошик</div>
+            <hr size="1px" color="black">
+            <div class="scroll-popup" id="view-popup">
+                {% for item in cart %}
+                    {% with product=item.product %}
+                        <div class="popup__product">
+                            <div class="popup__basket_imgpos">
+                                <a href="{{ product.get_absolute_url }}">
+                                    <img class="img__popup" src="{{ product.photo.url }}">
+                                </a>
+                            </div>
+                            <div class="popup__name">
+                                <a class="color-name" href="{{ product.get_absolute_url }}">
+                                    {{ product.name }}
+                                </a>
+                            </div>
+                            <div class="popup__count">
+                                <form action="{% url 'cart:cart_add' product.slug %}" method="post">
+                                    <div class="popup__quantity">
+                                        {{ item.update_quantity_form.quantity }}
+                                        {{ item.update_quantity_form.update }}
+                                        <input class="popup__basket-update" type="submit" value="Обновить">
+                                    </div>
+                                    {% csrf_token %}
+                                </form>
+                            </div>
+                            <div class="popup__price">
+                                {{ item.total_cost }}
+                            </div>
+                            <a class="popup__remove" href="javascript:void(0);" tabindex="1">⋮</a>
+                            <a class="sub-menu" href="{% url "cart:cart_remove" product.slug %}">
+                                <li class="popup_link_remove">Видалити</li>
+                            </a>
+                        </div>
+                    {% endwith %}
+                {% endfor %}
+            </div>
+            <div class="popup__under__content">
+                <div class="total-price-popup">Ціна замовлення: {{ cart.get_total_price }}</div>
+                <button class="popup__button_basket">Оформити заказ</button>
+            </div>
+        </div>
+    </div>
+    <a href="##" class="popup__area"></a>
+</div>
+<div id="head-left" class="area"></div>
 <nav class="main-menu">
     <ul>
         <li>
