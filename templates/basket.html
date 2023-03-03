@@ -53,7 +53,7 @@
         {% endfor %}
     </div>
     <div class="basket-pos-button">
-        <a href="{% url "orders:order_create" %}" class="button-basket">Оформити заказ</a>
+        <button class="button-basket">Оформити заказ</button>
     </div>
     <div class="total-price">Ціна замовлення: {{ cart.get_total_price }}</div>
 {% endblock %}

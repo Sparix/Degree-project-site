@@ -226,7 +226,7 @@ body {
     margin-bottom: 10px;
     min-width: 250px;
     border-radius: 10px;
-    min-height: 91vh;
+    min-height: 640px;
     position: fixed;
 }
 
@@ -630,7 +630,7 @@ body {
     background-color: #1b2024;
     margin-left: 70px;
     width: 300px;
-    height: 92vh;
+    height: 650px;
     color: #D7F1FF;
     padding-top: 10px;
 }
@@ -895,7 +895,8 @@ body {
 }
 
 .button-basket {
-    padding: 15px;
+    width: 200px;
+    height: 50px;
     background-color: #D7F1FF;
     border: none;
     outline: none;
@@ -918,6 +919,7 @@ body {
 }
 
 .img-basket {
+    background-color: #00D7FF;
     max-height: 126px;
     max-width: 100%;
 }
@@ -1375,7 +1377,6 @@ label span {
     margin-right: 10px;
     border-radius: 4px;
     margin-top: 10px;
-    position: relative;
 }
 
 .scroll-popup {
@@ -1478,7 +1479,7 @@ label span {
     display: none;
     background-color: #D7F1FF;
     position: absolute;
-    right: 5px;
+    right: 60px;
     margin-top: 5px;
     font-size: 20px;
     border-radius: 6px;
