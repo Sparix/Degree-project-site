@@ -22,13 +22,13 @@
                     Переглянуті товари
                 </div>
             </a>
-            {% if request.user.is_staff %}
-                <a href={% url 'stuff_form' %}>
-                    <div class="person {% block stuff_form %} {% endblock %}">
-                        Добавить товар
-                    </div>
-                </a>
-            {% endif %}
+        {% if request.user.is_staff %}
+            <a href={% url 'stuff_form' %}>
+                <div class="person {% block stuff_form %} {% endblock %}">
+                    Добавить товар
+                </div>
+            </a>
+        {% endif %}
         </div>
         <div class="content-acc">
             {% block prod %}
