@@ -89,7 +89,7 @@
             </div>
             <div class="popup__under__content">
                 <div class="total-price-popup">Ціна замовлення: {{ cart.get_total_price }}</div>
-                <button class="popup__button_basket">Оформити заказ</button>
+                <a href="{% url 'orders:order_create' %}" class="popup__button_basket">Оформити заказ</a>
             </div>
         </div>
     </div>
@@ -105,18 +105,53 @@
                     Категорії
                 </span>
             </a>
-
+        </li>
+        <li>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'cart:cart_detail' %}">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="nav-text">
+                    Корзина
+                </span>
+                </a>
+            {% else %}
+                <a href="#popup">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="nav-text">
+                    Корзина
+                </span>
+                </a>
+            {% endif %}
+        </li>
+        <li>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'home' %}">
+                <i class="fa fa-home"></i>
+                <span class="nav-text">
+                    Особистий кабінет
+                </span>
+            </a>
+            {% endif %}
         </li>
     </ul>
 
     <ul class="logout">
         <li>
-            <a href={% url 'logout' %}>
-                <i class="fa fa-power-off"></i>
-                <span class="nav-text">
+            {% if request.user.is_authenticated %}
+                <a href={% url 'logout' %}>
+                    <i class="fa fa-power-off"></i>
+                    <span class="nav-text">
                     Logout
                 </span>
-            </a>
+                </a>
+            {% else %}
+                <a href={% url 'logout' %}>
+                    <i class="fa fa-user"></i>
+                    <span class="nav-text">
+                    Login
+                </span>
+                </a>
+            {% endif %}
         </li>
     </ul>
 </nav>
