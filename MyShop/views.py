@@ -6,6 +6,7 @@ from django.contrib.auth import logout
 
 from cart.forms import CartAddProductForm
 from cart.cart import Cart
+from orders.models import *
 from .forms import *
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
@@ -218,5 +219,23 @@ class FilterProduct(DataMixin, ListView):
         context['brand'] = brand
         context['cart_product_form'] = cart_product_form
         context['manufactured'] = sorted(set(manufactured))
+        c_def = self.get_user_context()
+        return dict(list(context.items()) + list(c_def.items()))
+
+
+class UserOrder(DataMixin, ListView):
+    model = Order
+    template_name = 'Orders_user.html'
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        if not self.request.user.is_staff:
+            return Order.objects.filter(author=self.request.user)
+        else:
+            return Order.objects.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['order_item'] = OrderItem.objects.filter()
         c_def = self.get_user_context()
         return dict(list(context.items()) + list(c_def.items()))

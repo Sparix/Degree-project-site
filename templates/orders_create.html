@@ -1,22 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Checkout</h1>
-    <div class="order-info">
-        <h3>Your order</h3>
-        <ul>
-            {% for item in cart %}
-                <li>
-                    {{ item.quantity }}x {{ item.product.name }}
-                    <span>${{ item.total_price }}</span>
-                </li>
-            {% endfor %}
-        </ul>
-        <p>Total: ${{ cart.get_total_price }}</p>
+    <div class="orders">
+        <div class="order-info">
+            <h3>Заказ</h3>
+            <div class="scroll-order" id="view-order">
+                {% for item in cart %}
+                    {% with product=item.product %}
+                        <div class="order__product">
+                            <div class="popup__basket_imgpos">
+                                <a href="{{ product.get_absolute_url }}">
+                                    <img class="img__popup" src="{{ product.photo.url }}">
+                                </a>
+                            </div>
+                            <div class="popup__name">
+                                <a class="color-name" href="{{ product.get_absolute_url }}">
+                                    {{ product.name }}
+                                </a>
+                            </div>
+                            <div class="popup__price">
+                                {{ item.total_cost }}
+                            </div>
+                            <a class="popup__remove" href="javascript:void(0);" tabindex="1">⋮</a>
+                            <a class="sub-menu" href="{% url "cart:cart_remove" product.slug %}">
+                                <li class="popup_link_remove">Видалити</li>
+                            </a>
+                        </div>
+                        <span>{{ item.total_price }}</span>
+                    {% endwith %}
+                {% endfor %}
+            </div>
+            <div class="total-price-order">Ціна замовленння: {{ cart.get_total_price }}</div>
+        </div>
+        <form action="." method="post" class="order-form">
+            <div class="ordering">
+                <h1 class="pos-button-order">Оформлення замовлення</h1>
+                {% for order in form %}
+                    {{ order }}
+                {% endfor %}
+            </div>
+            <p class="pos-button-order"><input class="button-order" type="submit" value="Відправить заказ"></p>
+            {% csrf_token %}
+        </form>
     </div>
-    <form action="." method="post" class="order-form">
-        {{ form.as_p }}
-        <p><input type="submit" value="Place order"></p>
-        {% csrf_token %}
-    </form>
 {% endblock %}

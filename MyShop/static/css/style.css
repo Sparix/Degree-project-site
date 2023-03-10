@@ -417,7 +417,6 @@ body {
 
 .tov_slider {
     display: flex;
-    padding-left: 44px;
 }
 
 .secondary_slider {
@@ -450,10 +449,14 @@ body {
 
 .main_slider {
     max-width: 530px;
+    min-width: 300px;
+    max-height: 70vh;
 }
 
 .main-sl {
     max-width: 530px;
+    min-width: 300px;
+    max-height: 70vh;
 }
 
 .main_slider img {
@@ -473,7 +476,8 @@ body {
     border-radius: 20px;
     mix-blend-mode: normal;
     padding: 17px 37px 50px 37px;
-    max-width: 650px;
+    max-width: 80vh;
+    min-width: 80vh;
 }
 
 .price {
@@ -664,7 +668,7 @@ body {
 
 .content-acc {
     background-color: #1b2024;
-    width: 75%;
+    width: 200vh;
     margin: 10px;
     color: #D7F1FF;
     border-radius: 20px;
@@ -886,7 +890,7 @@ body {
 }
 
 .scroll-basket {
-    height: 500px;
+    height: 70vh;
     width: 97%;
     border-radius: 30px;
     margin-top: 10px;
@@ -1369,7 +1373,7 @@ label span {
 
 
 .popup__product {
-    background-color: #282828;
+    background-color: #1b2024;
     height: 100px;
     display: flex;
     margin-right: 10px;
@@ -1469,7 +1473,8 @@ label span {
 
 .popup__remove {
     color: #D7F1FF;
-    margin-left: 5px;
+    margin-left: 1px;
+    margin-right: 10px;
     margin-top: 7px;
     font-size: 26px;
 }
@@ -1483,8 +1488,6 @@ label span {
     font-size: 20px;
     border-radius: 6px;
 }
-
-
 
 .popup__remove:focus ~ .sub-menu,
 .popup__remove:active ~ .sub-menu,
@@ -1518,4 +1521,195 @@ label span {
 
 .color-name {
     color: #D7F1FF;
+}
+
+.orders {
+    margin-left: 20vh;
+    display: flex;
+}
+
+.ordering {
+    display: inline-block;
+    width: 75vh;
+}
+
+.order-input {
+    outline: none;
+    border: none;
+    background-color: #1b2024;
+    color: #D7F1FF;
+    width: 300px;
+    height: 30px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.button-order {
+    outline: none;
+    border: none;
+    background-color: #00e801;
+    color: #1b2024;
+    padding: 15px 10px 15px 10px;
+    border-radius: 7px;
+    transition: 0.7s;
+}
+
+.button-order:hover {
+    background-color: #1b2024;
+    color: red;
+}
+
+.pos-button-order {
+    text-align: center;
+    margin-left: -15px;
+}
+
+.order-form {
+    margin-right: 60px;
+    margin-left: auto;
+    margin-top: 20vh;
+}
+
+.scroll-order {
+    height: 59vh;
+    width: 97%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#view-order {
+    overflow-y: scroll;
+}
+
+#view-order::-webkit-scrollbar {
+    width: 15px;
+}
+
+#view-order::-webkit-scrollbar-thumb {
+    background-color: #1b2024;
+    border-radius: 7px;
+}
+
+#view-order::-webkit-scrollbar-track {
+    border-radius: 7px;
+}
+
+.total-price-order {
+    background-color: #1b2024;
+    color: #D7F1FF;
+    margin-top: 10px;
+    width: 200px;
+    text-align: center;
+    padding: 20px 5px;
+    border-radius: 7px;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.order__product {
+    background-color: #1b2024;
+    height: 100px;
+    display: flex;
+    margin-right: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.text-end-order {
+    color: #1b2024;
+    font-size: 32px;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.order_prod {
+    max-height: 60px;
+    vertical-align: center;
+    padding: 3px;
+    background-color: #00abce;
+    border-radius: 7px;
+}
+
+.order_block {
+    background-color: #D7F1FF;
+    color: #1b2024;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 151vh;
+    height: 150px;
+    display: flex;
+    border-radius: 7px;
+}
+
+.order_content {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.scroll-form-order {
+    height: 80vh;
+    width: 160vh;
+    border-radius: 30px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+}
+
+#scroll-view-order {
+    overflow-y: scroll;
+}
+
+#scroll-view-order::-webkit-scrollbar {
+    width: 15px;
+    background-color: #1b2024;
+}
+
+#scroll-view-order::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #00D7FF;
+}
+
+#scroll-view-order::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #D7F1FF;
+}
+
+.text-order-time {
+    display: flex;
+}
+
+.product_order_user {
+    margin: 10px;
+    display: flex;
+}
+
+.img-order {
+    margin: 10px;
+}
+
+.scroll-form-order-img {
+    width: 145vh;
+    border-radius: 30px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+}
+
+#scroll-view-order-img {
+    overflow-x: scroll;
+}
+
+#scroll-view-order-img::-webkit-scrollbar {
+    height: 7px;
+}
+
+#scroll-view-order-img::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #00D7FF;
+}
+
+#scroll-view-order-img::-webkit-scrollbar-track {
 }

@@ -30,7 +30,7 @@
         </div>
         <div class="name_cabinet">
             <div style="margin-bottom: 10px">
-                Ім'я пользователя: {{ user.get_username }}
+                Ім'я користувача: {{ user.get_username }}
             </div>
             {% if user.first_name %}
                 <div style="margin-bottom: 10px">
@@ -43,20 +43,20 @@
             {% endif %}
             {% if user.last_name %}
                 <div style="margin-bottom: 10px">
-                    Фамілія: {{ user.last_name }}
+                    Прізвище: {{ user.last_name }}
                 </div>
             {% else %}
                 <div style="margin-bottom: 10px">
-                    Фамілія: Не вказана
+                    Прізвище: Не вказана
                 </div>
             {% endif %}
             {% if user.email %}
                 <div style="margin-bottom: 10px">
-                    Email адресса: {{ user.email }}
+                    Email адреса: {{ user.email }}
                 </div>
             {% else %}
                 <div style="margin-bottom: 10px">
-                    Email адресса: Не вказана
+                    Email адреса: Не вказана
                 </div>
             {% endif %}
         </div>

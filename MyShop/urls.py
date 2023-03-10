@@ -17,6 +17,7 @@ urlpatterns = [
     path('edit_profile', update_user, name='edit_profile'),
     path('search/', Search.as_view(), name='search'),
     path('filter/<slug:cat_slug>/', FilterProduct.as_view(), name='filter'),
+    path('orders_user', UserOrder.as_view(), name='orders_user')
 ]
 
 if settings.DEBUG:

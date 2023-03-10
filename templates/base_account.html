@@ -7,19 +7,14 @@
                     Ім'я: {{ user.get_username }}
                 </div>
             </a>
-            <a href={% url 'home' %}>
-                <div class="person">
+            <a href={% url 'orders_user' %}>
+                <div class="person {% block history %} {% endblock %}">
                     Мої замовлення
                 </div>
             </a>
             <a href='{% url 'cart:cart_detail' %}'>
                 <div class="person{% block basket %} {% endblock %}">
                     Список бажань
-                </div>
-            </a>
-            <a href={% url 'home' %}>
-                <div class="person">
-                    Переглянуті товари
                 </div>
             </a>
         {% if request.user.is_staff %}
