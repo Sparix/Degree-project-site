@@ -1,0 +1,42 @@
+{% extends 'base_account.html' %}
+{% block history %}
+    active_acc
+{% endblock %}
+{% for i in orders %}
+    {{ i }}
+    {% for items in order_item %}
+        {% if items.orders == i %}
+            <img class="test_prod" src="{{ items.product.photo.url }}">
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+{% block prod %}
+    <div class="scroll-form-order" id="scroll-view-order">
+        {% for i in orders %}
+            <div class="order_block">
+                <div class="order_content">
+                    <div class="text-order-time">
+                        <div style="color: #1b2024; margin-right: 10px">{{ i }}</div>
+                        <div style="color: #00D7FF">{{ i.updated|date:"d-m-y" }} {{ i.updated|time:"H:i:s" }}</div>
+                        <div style="margin-left: 10px; color: #1b2024">
+                            Ціна заказа: {{ i.get_total_cost }}
+                        </div>
+                    </div>
+                    <div class="product_order_user">
+                        <div class="scroll-form-order-img" id="scroll-view-order-img">
+                            {% for items in order_item %}
+                                {% if items.orders == i %}
+
+                                    <div class="img-order">
+                                        <img class="order_prod" src="{{ items.product.photo.url }}">
+                                    </div>
+
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
