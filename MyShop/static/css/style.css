@@ -29,6 +29,7 @@ ul {
 }
 
 body {
+    height: 100%;
     margin: 0;
     background-color: #D7F1FF;
 }
@@ -212,10 +213,9 @@ body {
 }
 
 .product-tov {
-    margin: 10px 70px 10px 400px;
+    margin: 10px 200px 10px 47vh;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     text-align: center;
 }
 
@@ -1317,7 +1317,6 @@ label span {
     opacity: 0;
     visibility: hidden;
     z-index: 3;
-    transition: all 0.8s ease 0s;
 }
 
 .popup:target {
@@ -1713,3 +1712,26 @@ label span {
 
 #scroll-view-order-img::-webkit-scrollbar-track {
 }
+
+.paginate-block {
+    position: absolute;
+    left: 55.5%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+}
+
+.paginate-url-block {
+    background-color: #1b2024;
+    border-radius: 3px;
+    padding: 3px 5px;
+    margin: 3px;
+}
+
+.paginate-url {
+    color: #D7F1FF;
+}
+
+.paginate {
+    display: flex;
+}
+

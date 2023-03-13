@@ -11,7 +11,7 @@
 
                         <div class="info-prod">
                             <div class="text-prod">
-                                {{ prod.name }}
+                                {{ prod.name|truncatechars:60 }}
                             </div>
                             <div class="under-prod">
                                 <div class="cost-prod">
@@ -55,5 +55,14 @@
                 <div class="error-search">Продукта не знайдено</div>
             {% endif %}
         {% endfor %}
+    </div>
+    <div class="paginate-block">
+        <div class="paginate">
+            {% for p in paginator.page_range %}
+                <div class="paginate-url">
+                    <a style="color: #1b2024" href="?{{ request.GET.urlencode }}&page={{ p }}">{{ p }}</a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

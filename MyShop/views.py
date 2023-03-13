@@ -29,6 +29,7 @@ class CategoriesHome(DataMixin, ListView):
 
 class ProductHome(DataMixin, ListView):
     model = Product
+    paginate_by = 8
     template_name = 'product.html'
     context_object_name = 'product'
     allow_empty = False
@@ -161,6 +162,7 @@ def product_detail(request, product_slug):
 class Search(DataMixin, ListView):
     """Поиск товаров"""
     model = Product
+    paginate_by = 10
     template_name = 'search.html'
     context_object_name = 'product'
     allow_empty = False
@@ -183,6 +185,7 @@ class Search(DataMixin, ListView):
 
 
 class FilterProduct(DataMixin, ListView):
+    paginate_by = 8
     model = Product
     template_name = 'product.html'
     context_object_name = 'product'

@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-from django.utils.translation import gettext_lazy as _
 
 
 class Categories(models.Model):
@@ -25,7 +24,7 @@ class Product(models.Model):
     is_published = models.BooleanField(default=True)
     cat = models.ForeignKey('Categories', on_delete=models.PROTECT)
     cost = models.DecimalField(max_digits=10, decimal_places=2)
-    content = models.TextField(blank=True)
+    content = models.JSONField(default=dict)
 
     def __str__(self):
         return self.name
@@ -37,13 +36,6 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('product', kwargs={'product_slug': self.slug, })
-
-    def content_split(self):
-        cont_dict = {}
-        for cont in self.content.split(','):
-            con_split = cont.split('|')
-            cont_dict[con_split[0]] = con_split[1]
-        return cont_dict
 
     class Meta:
         ordering = ['-cost', 'name']
