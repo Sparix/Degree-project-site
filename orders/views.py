@@ -9,7 +9,10 @@ def order_create(request):
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
-            form.instance.author = request.user
+            if request.user.is_authenticated:
+                form.instance.author = request.user
+            else:
+                form.instance.author = 'Anonymous_user'
             order = form.save()
             for item in cart:
                 OrderItem.objects.create(orders=order,

@@ -4,7 +4,7 @@ from MyShop.models import Product
 
 
 class Order(models.Model):
-    author = models.ForeignKey(User, blank=True, on_delete=models.CASCADE)
+    author = models.CharField(max_length=100, blank=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()

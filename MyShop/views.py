@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, PasswordChangeView
+from django.db import transaction
+from django.db.models import Q
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
@@ -102,6 +104,61 @@ class PasswordChange(DataMixin, PasswordChangeView):
         return dict(list(context.items()) + list(c_def.items()))
 
 
+'''def update_user(request):
+    print(*UserProfile.objects.all())
+    try:
+        user_profile = UserProfile.objects.get(user_id=request.user.id)
+    except UserProfile.DoesNotExist:
+        return HttpResponse("invalid user_profile!")
+
+    if request.method == "POST":
+        update_user_form = UserForm2(data=request.POST, instance=request.user)
+        update_profile_form = UserProfileForm(data=request.POST, instance=user_profile)
+
+        if update_user_form.is_valid() and update_profile_form.is_valid():
+            user = update_user_form.save()
+            profile = update_profile_form.save(commit=False)
+            profile.user = user
+            profile.avatar = request.FILES['avatar']
+
+            profile.save()
+            return redirect('cabinet')
+        else:
+            print(update_user_form.errors, update_profile_form.errors)
+    else:
+        update_user_form = UserForm2(instance=request.user)
+        update_profile_form = UserProfileForm(instance=user_profile)
+
+    return render(request, 'edit_profile.html',
+                  {'update_user_form': update_user_form, 'update_profile_form': update_profile_form})'''
+
+
+@login_required
+def update_user(request):
+    if request.method == 'POST':
+        update_user_form = UserForm2(request.POST, request.FILES, instance=request.user)
+        update_profile_form = UserProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
+
+        if update_user_form.is_valid() and update_profile_form.is_valid():
+            user = update_user_form.save(commit=False)
+
+            user.save()
+            profile = update_profile_form.save(commit=False)
+            profile.user = user
+
+            profile.save()
+            return redirect('cabinet')
+        else:
+            print(update_user_form.errors, update_profile_form.errors)
+    else:
+        update_profile_form = UserProfileForm(instance=request.user.userprofile)
+        update_user_form = UserForm2(instance=request.user)
+    context = {'update_user_form': update_user_form,  # basic user form
+               'update_profile_form': update_profile_form  # user profile form
+               }
+    return render(request, 'edit_profile.html', context)
+
+
 class ProfilePage(DataMixin, DetailView):
     model = UserProfile
     template_name = 'cabinet.html'
@@ -114,37 +171,6 @@ class ProfilePage(DataMixin, DetailView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context()
         return dict(list(context.items()) + list(c_def.items()))
-
-
-@login_required
-def update_user(request):
-    try:
-        user_profile = UserProfile.objects.get(user=request.user)
-    except UserProfile.DoesNotExist:
-        return HttpResponse("invalid user_profile!")
-
-    if request.method == "POST":
-        update_user_form = UserForm2(data=request.POST, instance=request.user)
-        update_profile_form = UserProfileForm(data=request.POST, instance=user_profile)
-
-        if update_user_form.is_valid() and update_profile_form.is_valid():
-            user = update_user_form.save()
-            profile = update_profile_form.save(commit=False)
-            profile.user = user
-
-            if 'avatar' in request.FILES:
-                profile.avatar = request.FILES['avatar']
-
-            profile.save()
-            return redirect('cabinet')
-        else:
-            print(update_user_form.errors, update_profile_form.errors)
-    else:
-        update_user_form = UserForm2(instance=request.user)
-        update_profile_form = UserProfileForm(instance=user_profile)
-
-    return render(request, 'edit_profile.html',
-                  {'update_user_form': update_user_form, 'update_profile_form': update_profile_form})
 
 
 def product_detail(request, product_slug):
@@ -168,7 +194,8 @@ class Search(DataMixin, ListView):
     allow_empty = False
 
     def get_queryset(self):
-        search = Product.objects.filter(name__icontains=self.request.GET.get("search-prod"))
+        search = Product.objects.filter(Q(name__icontains=self.request.GET.get("search-prod")) | Q(
+            content__icontains=self.request.GET.get("search-prod")))
 
         if len(search) == 0:
             return ' '

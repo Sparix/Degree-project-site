@@ -100,7 +100,7 @@
     <ul>
         <li>
             <a href="{% url 'home' %}">
-                <i class="fa fa-home"></i>
+                <i class="fa fa-inbox"></i>
                 <span class="nav-text">
                     Категорії
                 </span>
@@ -125,14 +125,24 @@
         </li>
         <li>
             {% if request.user.is_authenticated %}
-            <a href="{% url 'home' %}">
-                <i class="fa fa-home"></i>
-                <span class="nav-text">
+                <a href="{% url 'home' %}">
+                    <i class="fa fa-home"></i>
+                    <span class="nav-text">
                     Особистий кабінет
                 </span>
-            </a>
+                </a>
             {% endif %}
         </li>
+        {% if request.user.is_authenticated %}
+            <li>
+                <a href="{% url 'orders_user' %}">
+                    <i class="fa fa-list"></i>
+                    <span class="nav-text">
+                    Список заказів
+                </span>
+                </a>
+            </li>
+        {% endif %}
     </ul>
 
     <ul class="logout">

@@ -52,13 +52,13 @@ class UserInline(admin.StackedInline):
 
 
 # Определяем новый класс настроек для модели User
-class UserAdmin(UserAdmin):
+class AdminUser(UserAdmin):
     inlines = (UserInline,)
 
 
 # Перерегистрируем модель User
 admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+admin.site.register(User, AdminUser)
 
 admin.site.register(Categories, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
