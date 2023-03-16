@@ -120,13 +120,11 @@
             {% endfor %}
         </div>
     </div>
-    <div class="paginate-block">
-        <div class="paginate">
-            {% for p in paginator.page_range %}
-                <div class="paginate-url-block">
-                    <a class="paginate-url" href="?{{ request.GET.urlencode }}&page={{ p }}">{{ p }}</a>
-                </div>
-            {% endfor %}
-        </div>
+    <div class="paginate">
+        {% for p in paginator.page_range %}
+            <div class="paginate-url-block">
+                <a class="paginate-url" href="?{{ request.GET.urlencode }}&page={{ p }}">{{ p }}</a>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

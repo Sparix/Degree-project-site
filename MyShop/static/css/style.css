@@ -51,6 +51,7 @@ body {
     margin-right: 20px;
 }
 
+
 .head-text {
     margin-left: auto;
 }
@@ -64,6 +65,7 @@ body {
     background-color: #7777;
     border-radius: 7px;
 }
+
 
 .bi-person {
     fill: white;
@@ -1686,7 +1688,7 @@ label span {
 }
 
 .img-order {
-    margin: 10px;
+    margin: 10px 20px 10px 10px;
 }
 
 .scroll-form-order-img {
@@ -1713,12 +1715,6 @@ label span {
 #scroll-view-order-img::-webkit-scrollbar-track {
 }
 
-.paginate-block {
-    position: absolute;
-    left: 55.5%;
-    bottom: 20px;
-    transform: translate(-50%, -50%);
-}
 
 .paginate-url-block {
     background-color: #1b2024;
@@ -1733,5 +1729,27 @@ label span {
 
 .paginate {
     display: flex;
+    justify-content: center;
+    margin-left: 22vh;
 }
 
+.num-bucket {
+    position: absolute;
+    background-color: red;
+    color: #1b2024;
+    margin-top: -40px;
+    margin-left: 23px;
+    padding: 1px 4px;
+    border-radius: 50%;
+}
+
+.count-prod {
+    margin-top: 8px;
+    margin-left: -33px;
+}
+
+.custom-count-prod {
+    background-color: #00abce;
+    padding: 3px;
+    border-radius: 10%;
+}

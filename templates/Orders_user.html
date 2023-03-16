@@ -21,9 +21,13 @@
                         <div class="scroll-form-order-img" id="scroll-view-order-img">
                             {% for items in order_item %}
                                 {% if items.orders == i %}
-
                                     <div class="img-order">
                                         <img class="order_prod" src="{{ items.product.photo.url }}">
+                                    </div>
+                                    <div class="count-prod">
+                                        <div class="custom-count-prod">
+                                            {{ items.quantity }}
+                                        </div>
                                     </div>
 
                                 {% endif %}
