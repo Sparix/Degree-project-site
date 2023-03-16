@@ -120,11 +120,35 @@
             {% endfor %}
         </div>
     </div>
-    <div class="paginate">
-        {% for p in paginator.page_range %}
+    <div class="paginate-prod">
+        {% if page_obj.has_previous %}
             <div class="paginate-url-block">
-                <a class="paginate-url" href="?{{ request.GET.urlencode }}&page={{ p }}">{{ p }}</a>
+                <a class="paginate-url"
+                   href="?{{ request.GET.urlencode }}&page={{ page_obj.previous_page_number }}">
+                    <div class="arrow-left"></div>
+                </a>
             </div>
+        {% endif %}
+        {% for p in paginator.page_range %}
+            {% if p == page_obj.number %}
+                <div class="paginate-url-block-for-num-1">
+                    <div class="paginate-url-for-num-1">{{ p }}</div>
+                </div>
+            {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                <div class="paginate-url-block-for-num">
+                    <a class="paginate-url-for-num"
+                       href="?{{ request.GET.urlencode }}&page={{ p }}">{{ p }}
+                    </a>
+                </div>
+            {% endif %}
         {% endfor %}
+    {% if page_obj.has_next %}
+        <div class="paginate-url-block">
+            <a class="paginate-url"
+               href="?{{ request.GET.urlencode }}&page={{ page_obj.next_page_number }}">
+                <div class="arrow-right"></div>
+            </a>
+        </div>
+    {% endif %}
     </div>
 {% endblock %}

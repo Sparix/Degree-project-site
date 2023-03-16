@@ -3,7 +3,7 @@
 {% block content %}
     <div class="orders">
         <div class="order-info">
-            <h3>Заказ</h3>
+            <div class="title-order">Заказ</div>
             <div class="scroll-order" id="view-order">
                 {% for item in cart %}
                     {% with product=item.product %}
