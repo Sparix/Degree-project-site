@@ -2,9 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.db import transaction
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
+from django.views import View
+from django.contrib import messages
 
 from cart.forms import CartAddProductForm
 from cart.cart import Cart
@@ -41,9 +44,9 @@ class ProductHome(DataMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         cart_product_form = CartAddProductForm()
-        product = Product.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
+        product_cart = Product.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
         slug = self.kwargs['cat_slug']
-        manufactured = [manuf.manufactured for manuf in product]
+        manufactured = [manuf.manufactured for manuf in product_cart]
         context = super().get_context_data(**kwargs)
         context['manufactured'] = sorted(set(manufactured))
         context['slug'] = slug
@@ -75,7 +78,7 @@ class LoginUser(DataMixin, LoginView):
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_success_url(self):
-        return reverse_lazy('cabinet')
+        return reverse_lazy('home')
 
 
 class AddProduct(DataMixin, CreateView):
@@ -90,7 +93,7 @@ class AddProduct(DataMixin, CreateView):
 
 def logout_user(request):
     logout(request)
-    return redirect('home')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 class PasswordChange(DataMixin, PasswordChangeView):
@@ -177,12 +180,18 @@ def product_detail(request, product_slug):
     product = get_object_or_404(Product,
                                 slug=product_slug,
                                 is_published=True)
+    review = Comment.objects.filter(product__slug=product_slug)
+    rating = sum([rat.rating for rat in review])
+    if rating > 0:
+        rating /= len(review)
+
     cart_product_form = CartAddProductForm()
     cart = Cart(request)
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(initial={'quantity': item['quantity'], 'update': True})
     return render(request, 'forproducts.html', {'product': product,
-                                                'cart_product_form': cart_product_form, 'cart': cart})
+                                                'cart_product_form': cart_product_form, 'cart': cart,
+                                                'rating': round(rating, 1)})
 
 
 class Search(DataMixin, ListView):
@@ -269,3 +278,24 @@ class UserOrder(DataMixin, ListView):
         context['order_item'] = OrderItem.objects.filter()
         c_def = self.get_user_context()
         return dict(list(context.items()) + list(c_def.items()))
+
+
+def comments(request, product_slug):
+    product = Product.objects.get(slug=product_slug,
+                                  is_published=True)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            data_form = form.save(commit=False)
+            data_form.rating = request.POST['rate']
+            data_form.author = request.user
+            data_form.product = product
+            data_form.save()
+            return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        cart_prod_form = CartAddProductForm()
+        form_comment = CommentForm
+        comment = Comment.objects.filter(product__slug=product.slug)
+        return render(request, 'comments.html',
+                      {'product': product, "cart_prod_form": cart_prod_form, "form_comment": form_comment,
+                       'comment': comment})

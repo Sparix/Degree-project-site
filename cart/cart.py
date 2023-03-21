@@ -51,12 +51,6 @@ class Cart(object):
             self.cart[product_slug]['quantity'] += quantity
         self.save()
 
-    def count(self):
-        """
-        Подсчет всех товаров в корзине.
-        """
-        return sum(item['quantity'] for item in self.cart.values())
-
     def save(self):
         # Обновление сессии cart
         self.session[settings.CART_SESSION_ID] = self.cart

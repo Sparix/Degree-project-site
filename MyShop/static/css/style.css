@@ -397,6 +397,8 @@ body {
     font-size: 24px;
     font-weight: bold;
     text-align: center;
+    margin-left: 60px;
+    margin-right: 60px;
 }
 
 .all_about {
@@ -405,11 +407,28 @@ body {
     background-color: #282828;
     margin-bottom: 38px;
     color: #D7F1FF;
+    display: flex;
 }
 
 .all_about p {
-    border-bottom: 1px solid #00D7FF;
     display: inline-block;
+    margin-right: 20px;
+}
+
+.active {
+    border-bottom: 1px solid #00D7FF;
+    color: #00D7FF;
+}
+
+.not-active {
+}
+
+.not-active:hover {
+    border-bottom: 1px solid #00D7FF;
+}
+
+.color-comment {
+    color: #D7F1FF;
 }
 
 .tov_content {
@@ -436,10 +455,12 @@ body {
 }
 
 .min-sl {
-    height: 55px;
-    width: 55px;
+    max-height: 55px;
+    max-width: 55px;
     padding: 2.5px;
     border-radius: 7px;
+    margin-top: 50%;
+    transform: translateY(-50%);
 }
 
 .secondary_slider .mini_slide:first-child {
@@ -498,11 +519,12 @@ body {
 .add_btn {
     background: #00D7FF;
     border-radius: 10px;
-    padding: 15px 70px;
+    width: 17vw;
+    height: 60px;
     font-size: 24px;
-    line-height: 29px;
     margin-bottom: 42px;
-    transition: 1s;
+    transition: 0.3s;
+    outline: none;
 }
 
 .add_btn:hover {
@@ -557,7 +579,7 @@ body {
 
 .label-inp {
     height: 40px;
-    width: 300px;
+    width: 17vw;
     border-radius: 7px;
     outline: none;
     border: none;
@@ -1852,4 +1874,328 @@ label span {
     text-align: center;
     font-size: 27px;
     margin-top: 10px;
+}
+
+.content_comment {
+    margin-left: 20vh;
+}
+
+.comments {
+    color: #D7F1FF;
+    background-color: #1b2024;
+    border-radius: 12px;
+    width: 35vw;
+    min-height: 20vh;
+    padding: 20px;
+    margin: 10px 10px 30px 10px;
+}
+
+.top__content_name {
+    color: #D7F1FF;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.comment__feedback {
+    background-color: #1b2024;
+    color: #D7F1FF;
+    width: 35vw;
+    padding: 10px 20px 10px 20px;
+    border-radius: 12px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.text_leave_feedback {
+    color: #D7F1FF;
+}
+
+.button_for_comment {
+    margin-right: 20px;
+    margin-left: auto;
+    border: 1px #00D7FF solid;
+    padding: 6px;
+    border-radius: 9px;
+    transition: 0.3s;
+    color: #D7F1FF;
+}
+
+.button_for_comment:hover {
+    color: red;
+}
+
+.date_top {
+    margin-right: 30px;
+    margin-left: auto;
+}
+
+.comment__advantages {
+    margin-top: 20px;
+}
+
+.text_advantages {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.text__adv {
+    margin-left: 20px;
+}
+
+.for_product_comment {
+    background-color: #1b2024;
+    width: 20vw;
+    height: 170px;
+    border-radius: 12px;
+    padding: 15px;
+    position: relative;
+}
+
+.scroll-form-comment {
+    height: 60vh;
+    margin-right: 20px;
+    margin-left: auto;
+    margin-top: 30px;
+}
+
+#scroll-view-comment {
+    overflow-y: scroll;
+}
+
+#scroll-view-comment::-webkit-scrollbar {
+    width: 15px;
+}
+
+#scroll-view-comment::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #00D7FF;
+}
+
+#scroll-view-comment::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.img_product {
+}
+
+.min-img-prod {
+    max-width: 80px;
+    border-radius: 7px;
+    max-height: 80px;
+}
+
+.for_product_top_content {
+    display: flex;
+}
+
+.name_prod_top {
+    margin: 0 10px;
+    color: #D7F1FF;
+    font-size: 12px;
+}
+
+.cost_prod {
+    bottom: 65px;
+    font-size: 32px;
+    color: #D7F1FF;
+    font-weight: bold;
+    position: absolute;
+    left: 40px;
+}
+
+.btn_prod_bucket {
+    width: 17vw;
+    height: 40px;
+    outline: none;
+    border: none;
+    background-color: #00e801;
+    border-radius: 7px;
+    font-size: 24px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.center_form_comment {
+    bottom: 20px;
+    position: absolute;
+    left: 50%;
+    margin-left: -8.5vw;
+}
+
+.btn_prod_bucket:hover {
+    background-color: green;
+}
+
+.test-com {
+    background-color: #1b2024;
+    width: 100px;
+    height: 100px;
+}
+
+.right_block_comment {
+    display: block;
+    margin: -10px 20vw 0 auto;
+}
+
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+    margin-left: 20px;
+}
+
+.rate:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+}
+
+.rate:not(:checked) > label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+}
+
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rate > input:checked ~ label {
+    color: #ffc700;
+}
+
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;
+}
+
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+.add_review {
+    background-color: #1b2024;
+    width: 20vw;
+    height: 400px;
+    margin-top: 30px;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.inp-comment {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.area-comment {
+    width: 17vw;
+    height: 10vh;
+    background-color: #E0FFFF;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 18px;
+}
+
+.btn_prod_comment {
+    width: 17vw;
+    height: 40px;
+    outline: none;
+    border: none;
+    background-color: #00e801;
+    border-radius: 7px;
+    font-size: 24px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn_prod_comment:hover {
+    background-color: green;
+}
+
+.btn-com {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.text-rate {
+    color: red;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.rate-flex {
+    display: flex;
+}
+
+.log-review {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.checked {
+    color: #deb217;
+}
+
+.no-review {
+    color: red;
+    font-size: 24px;
+}
+
+.rating {
+    font-size: 25px;
+    display: inline-flex;
+    align-items: flex-end;
+    margin-top: -30px;
+}
+
+.rating_body {
+    position: relative;
+}
+
+.rating_body::before {
+    content: '★★★★★';
+    display: block;
+}
+
+.rating_items {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.rating_active {
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    overflow: hidden;
+    top: 0;
+
+}
+
+.rating_active::before {
+    content: '★★★★★';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    color: red;
+}
+
+.rating_value {
+    font-size: 100%;
+    margin-left: 10px;
 }

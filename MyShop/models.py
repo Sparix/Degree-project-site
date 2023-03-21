@@ -64,3 +64,18 @@ def create_user_profile(sender, instance, created, **kwargs):
         UserProfile.objects.create(user=instance)
     else:
         instance.userprofile.save()
+
+
+class Comment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    create = models.DateTimeField(auto_now_add=True)
+    update = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    rating = models.IntegerField(default=1)
+    comment = models.TextField(max_length=500)
+    advantages = models.CharField(max_length=100)
+    disadvantages = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ['-update', 'rating']

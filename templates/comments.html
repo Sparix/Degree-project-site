@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="prod-detail">
+        <div class="top__container">
+            <div class="tov_name">
+                <h1 class="top_tov_name">Відгуки про відеокарту{{ product.name|slice:"8:" }}</h1>
+            </div>
+            <div class="all_about">
+                {% block all_about %}
+                    <p class="not-active"><a href="{% url 'product' product.slug %}" class="color-comment">Все про
+                        товар</a></p>
+                    <p class="not-active active">Відгуки</p>
+                {% endblock %}
+            </div>
+        </div>
+        <div style="display: flex">
+            <div class="content_comment">
+                <div class="scroll-form-comment" id="scroll-view-comment">
+                    {% if comment %}
+                        {% for review in comment %}
+                            <div class="comments">
+                                <div class="top__content_name">
+                                    <div class="name__top">Відгук від: {{ review.name }}</div>
+                                    <div class="date_top">{{ review.update|time:"H:i:s" }} {{ review.update|date:"d-m-y" }}</div>
+                                </div>
+                                <hr color="#00D7FF" size="1px">
+                                <span class="rate-comment">
+                                <i {% if review.rating > 0 %}class="checked"{% endif %}>★</i>
+                                <i {% if review.rating > 1 %}class="checked"{% endif %}>★</i>
+                                <i {% if review.rating > 2 %}class="checked"{% endif %}>★</i>
+                                <i {% if review.rating > 3 %}class="checked"{% endif %}>★</i>
+                                <i {% if review.rating > 4 %}class="checked"{% endif %}>★</i></span>
+                                <div class="comment__text">
+                                    {{ review.comment }}
+                                </div>
+                                <div class="comment__advantages">
+                                    <div class="text_advantages">
+                                        Переваги:
+                                    </div>
+                                    <div class="text__adv">{{ review.advantages }}
+                                    </div>
+                                    <div class="text_advantages">
+                                        Недоліки:
+                                    </div>
+                                    <div class="text__adv">{{ review.disadvantages }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="no-review">Немає коментарів. Залиште свій відгук про цей товар</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="right_block_comment">
+                <div class="for_product_comment">
+                    <div class="for_product_top_content">
+                        <div class="img_product">
+                            <img class="min-img-prod" src="{{ product.photo.url }}">
+                        </div>
+                        <div class="name_prod_top">
+                            {{ product.name|truncatechars:200 }}
+                        </div>
+                    </div>
+                    <div class="cost_prod">
+                        {{ product.cost }} ₴
+                    </div>
+                    <div class="center_form_comment">
+                        <form action="{% url 'cart:cart_add' product.slug %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn_prod_bucket">В корзину</button>
+                            {% for cart in cart_prod_form %}
+                                {{ cart.as_hidden }}
+                            {% endfor %}
+                        </form>
+                    </div>
+                </div>
+                <div class="add_review">
+                    <form action="{% url 'comment_user' product.slug %}" method="POST">
+                        {% csrf_token %}
+                        <div class="rate-flex">
+                            <div class="rate">
+                                <input type="radio" id="star5" name="rate" value="5"/>
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4"/>
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3"/>
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2"/>
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1"/>
+                                <label for="star1" title="text">1 star</label>
+                            </div>
+                            <div class="text-rate">
+                                Як ви оцінюєте цей товар?
+                            </div>
+                        </div>
+                        {% for f in form_comment %}
+                            <div class="inp-comment">
+                                {{ f }}
+                            </div>
+                        {% endfor %}
+                        {% if request.user.is_authenticated %}
+                            <div class="btn-com">
+                                <button class="btn_prod_comment">Відправить</button>
+                            </div>
+                        {% else %}
+                            <div class="log-review">Ви повинні увійти, щоб залишити відгук <a style="color: #00D7FF"
+                                                                                              href="{% url 'login' %}">Ввійти</a>
+                            </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

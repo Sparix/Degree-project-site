@@ -142,13 +142,13 @@
                 </div>
             {% endif %}
         {% endfor %}
-    {% if page_obj.has_next %}
-        <div class="paginate-url-block">
-            <a class="paginate-url"
-               href="?{{ request.GET.urlencode }}&page={{ page_obj.next_page_number }}">
-                <div class="arrow-right"></div>
-            </a>
-        </div>
-    {% endif %}
+        {% if page_obj.has_next %}
+            <div class="paginate-url-block">
+                <a class="paginate-url"
+                   href="?{{ request.GET.urlencode }}&page={{ page_obj.next_page_number }}">
+                    <div class="arrow-right"></div>
+                </a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

@@ -60,6 +60,7 @@ class AdminUser(UserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, AdminUser)
 
+admin.site.register(Comment)
 admin.site.register(Categories, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 '''admin.site.register(Videocard, VideoCardAdmin)'''

@@ -77,3 +77,16 @@ class UserProfileForm(forms.ModelForm):
         widgets = {
             'avatar': forms.FileInput(attrs={'class': 'image-form'}),
         }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('comment', 'name', 'advantages', 'disadvantages')
+
+        widgets = {
+            'comment': forms.Textarea(attrs={'class': 'area-comment', 'placeholder': 'Ваш відгук'}),
+            'name': forms.TextInput(attrs={'class': 'label-inp', 'placeholder': "Ваше ім'я "}),
+            'advantages': forms.TextInput(attrs={'class': 'label-inp', 'placeholder': "Переваги"}),
+            'disadvantages': forms.TextInput(attrs={'class': 'label-inp', 'placeholder': "Недоліки"}),
+        }

@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% load static %}
     <div class="prod-detail">
         <div class="top__container">
             <div class="tov_name">
-                <h1 class="top_tov_name">{{ product.name|truncatechars:100 }}</h1>
+                <h1 class="top_tov_name">{{ product.name }}</h1>
             </div>
             <div class="all_about">
-                <p>Все про товар</p>
+                {% block all_about %}
+                    <p class="not-active active">Все про товар</p>
+                    <p class="not-active"><a href="{% url 'comment_user' product.slug %}"
+                                             class="color-comment">Відгуки</a></p>
+                {% endblock %}
             </div>
             <div class="tov_content">
                 <div class="tov_slider">
@@ -23,16 +28,23 @@
                     <div class="price">
                         {{ product.cost }}
                     </div>
-                    <div class="add_cart_btn">
-                        <form action="{% url 'cart:cart_add' product.slug %}" method="post">
-                            <button type="submit" class="add_btn">Добавить в корзину</button>
-                            {% for cart in cart_product_form %}
-                                {{ cart }}
-                            {% endfor %}
-                            {% csrf_token %}
-
-                        </form>
-                    </div>
+                    <form action="{% url 'cart:cart_add' product.slug %}" method="post">
+                        <button type="submit" class="add_btn">Добавить в корзину</button>
+                        {% for cart in cart_product_form %}
+                            {{ cart }}
+                        {% endfor %}
+                        {% csrf_token %}
+                    </form>
+                    {% if rating %}
+                        <div class="rating">
+                            <div class="rating_body">
+                                <div class="rating_active"></div>
+                                <div class="rating_items"></div>
+                            </div>
+                            <div class="rating_value">{{ rating }}</div>
+                            <script src={% static 'Js/rating.js' %}></script>
+                        </div>
+                    {% endif %}
                     <div class="parameters">
                         <div class="name_parameters">
                             <h3>Параметри</h3>
