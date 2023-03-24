@@ -17,6 +17,9 @@ class Categories(models.Model):
     def get_absolute_url(self):
         return reverse('category', kwargs={'cat_slug': self.slug})
 
+    class Meta:
+        ordering = ['name']
+
 
 class Product(models.Model):
     name = models.CharField(max_length=200)

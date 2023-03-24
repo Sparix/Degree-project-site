@@ -41,7 +41,7 @@ class ProductHome(DataMixin, ListView):
 
     def get_queryset(self):
         return Product.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True).annotate(
-            rating=Avg('comment__rating'))
+            rating=Avg('comment__rating')).order_by('-rating')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         cart_product_form = CartAddProductForm()
@@ -204,7 +204,6 @@ class FilterProduct(DataMixin, ListView):
         price_from = self.request.GET.get('price_from', 0)
         price_to = self.request.GET.get('price_to', 256000)
         ordering = self.request.GET.get('ordering', '-cost')
-        ordering_rate = self.request.GET.get('ordering_rate', '-cost')
         manufactured = [manuf.manufactured for manuf in
                         Product.objects.filter(is_published=True, cat__slug=self.kwargs['cat_slug'])]
         brand = self.request.GET.getlist('brand', manufactured)
@@ -279,18 +278,32 @@ def comments(request, product_slug):
         return render(request, 'comments.html', context)
 
 
-def home(request):
-    product = Product.objects.filter(is_published=True).annotate(rating=Avg('comment__rating'),
-                                                                 comments=Count('comment__comment')) \
-        .order_by('-comments', '-rating')
-    categories = {cat.cat.name: cat.cat.slug for cat in product}
-    cat_prod = {}
-    for category, slug in categories.items():
-        for prod in product:
-            if prod.cat.slug == slug:
-                try:
-                    cat_prod[category, slug].append(prod)
-                except KeyError:
-                    cat_prod[category, slug] = [prod]
+class Home(DataMixin, ListView):
+    model = Product
+    template_name = 'home.html'
+    context_object_name = 'category'
 
-    return render(request, 'home.html', {'product': product, 'categories': categories, 'cat_prod': cat_prod})
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context()
+        product = self.get_queryset()
+        categories = {cat.cat.name: cat.cat.slug for cat in product}
+        cat_prod = {}
+        cart_prod_form = CartAddProductForm()
+        for category, slug in categories.items():
+            for prod in product:
+                if prod.cat.slug == slug:
+                    try:
+                        cat_prod[category, slug].append(prod)
+                    except KeyError:
+                        cat_prod[category, slug] = [prod]
+        context['product'] = product
+        context['categories'] = categories
+        context['cat_prod'] = cat_prod
+        context['cart_product_form'] = cart_prod_form
+        return dict(list(context.items()) + list(c_def.items()))
+
+    def get_queryset(self):
+        return Product.objects.filter(is_published=True).annotate(rating=Avg('comment__rating'),
+                                                                  comments=Count('comment__comment')) \
+            .order_by('-comments', '-rating')

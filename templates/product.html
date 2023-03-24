@@ -100,10 +100,8 @@
                                                     </svg>
                                                     {% for cart in cart_product_form %}
                                                         {{ cart.as_hidden }}
-                                                        {{ cart.as_hidden }}
                                                     {% endfor %}
                                                 </button>
-
                                                 {% csrf_token %}
                                             </form>
                                         {% else %}
@@ -131,7 +129,7 @@
             {% endfor %}
         </div>
     </div>
-    {% if paginator.count > 1 %}
+    {% if paginator.num_pages > 1 %}
         <div class="paginate-prod">
             {% if page_obj.has_previous %}
                 <div class="paginate-url-block">

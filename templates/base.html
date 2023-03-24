@@ -9,9 +9,9 @@
 </head>
 <body>
 <div class="header">
-    <div class="pos_logo">
+    <a class="pos_logo" href="{% url 'home' %}">
         <img class="logo_shop" src="{% static 'img/logo2.png' %}" alt="">
-    </div>
+    </a>
     <ul class="head-text">
         <li>
             <form action="{% url 'search' %}" method="get" class="search-form">
@@ -110,7 +110,7 @@
     <ul>
         <li>
             <a href="{% url 'home' %}">
-                <i class="fa fa-folder"></i>
+                <i class="fa fa-home"></i>
                 <span class="nav-text">
                     Головна сторінка
                 </span>
