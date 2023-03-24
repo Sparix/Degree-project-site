@@ -31,7 +31,7 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):  # new
+    def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
@@ -40,7 +40,7 @@ class Product(models.Model):
         return reverse('product', kwargs={'product_slug': self.slug, })
 
     class Meta:
-        ordering = ['-cost', 'name']
+        ordering = ['name']
 
 
 class UserProfile(models.Model):

@@ -37,7 +37,7 @@ body {
 .header {
     width: 100%;
     height: 60px;
-    background-color: #100c0c;
+    background-color: black;
     align-items: center;
     display: flex;
 }
@@ -53,7 +53,7 @@ body {
 
 
 .head-text {
-    margin-left: auto;
+    margin: auto;
 }
 
 .bi-basket {
@@ -233,13 +233,14 @@ body {
 }
 
 .content-product {
-    height: 370px;
+    height: 380px;
     width: 300px;
     background-color: #1b2024;
     margin-left: 10px;
     margin-top: 10px;
     border-radius: 10px;
     transition: 0.3s;
+    padding: 2px;
 }
 
 .content-product:hover .text-cat {
@@ -344,8 +345,14 @@ body {
 
 .basket-in-product {
     background-color: #00e801;
-    padding: 3px 6px 3px 6px;
+    padding: 2px 6px 2px 6px;
     border-radius: 3px;
+}
+
+.basket-empty {
+    color: red;
+    text-align: center;
+    font-size: 32px;
 }
 
 .text-cat {
@@ -360,6 +367,7 @@ body {
     color: #D7F1FF;
     margin-top: 10px;
     flex-grow: 1;
+    text-align: center;
 }
 
 .prod {
@@ -2198,4 +2206,108 @@ label span {
 .rating_value {
     font-size: 100%;
     margin-left: 10px;
+}
+
+
+
+.rating_prod {
+    display: flex;
+    align-items: flex-end;
+    font-size: 25px;
+    line-height: 0.75;
+    color: #D7F1FF;
+    margin-left: 10px;
+}
+
+.rating_body_prod {
+    position: relative;
+}
+
+.rating_body_prod:before{
+    content: '★★★★★';
+    display: block;
+}
+
+.rating_active_prod {
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.rating_active_prod:before {
+    content: '★★★★★';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: #deb217;
+}
+
+.rating_items_prod {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.rating_item_prod {
+    flex: 0 0 20%;
+    height: 100%;
+    opacity: 0;
+}
+
+.rating_value_prod {
+    font-size: 75%;
+    line-height: 1;
+    padding: 0 0 0 10px;
+}
+
+.rate-prod {
+    min-height: 22px;
+    margin-top: 10px;
+}
+
+.home_product {
+    display: block;
+    margin-left: 130px;
+}
+
+.top_prod {
+    display: flex;
+}
+
+.text_top_prod {
+    font-size: 30px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.product_home {
+    margin-bottom: 100px;
+}
+
+.link_category {
+    color: red;
+    font-size: 18px;
+}
+.link_category:hover {
+    border-bottom: 2px solid #1b2024;
+}
+
+.logo_shop {
+    max-height: 70px;
+}
+
+.pos_logo {
+    margin: auto 10px auto 200px;
+}
+
+.logo_big {
+    width: 99.1vw;
 }

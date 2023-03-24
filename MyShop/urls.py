@@ -5,7 +5,8 @@ from Degree import settings
 from .views import *
 
 urlpatterns = [
-    path('', CategoriesHome.as_view(), name='home'),
+    path('', home, name='home'),
+    path('categories', CategoriesHome.as_view(), name='categories'),
     path('product/<slug:cat_slug>/', ProductHome.as_view(), name='category'),
     path('aboutproduct/<slug:product_slug>/', product_detail, name='product'),
     path('register', RegisterUser.as_view(), name='register'),

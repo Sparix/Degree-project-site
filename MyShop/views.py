@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.db import transaction
-from django.db.models import Q
+from django.db.models import Q, Avg, Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -40,7 +40,8 @@ class ProductHome(DataMixin, ListView):
     allow_empty = False
 
     def get_queryset(self):
-        return Product.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
+        return Product.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True).annotate(
+            rating=Avg('comment__rating'))
 
     def get_context_data(self, *, object_list=None, **kwargs):
         cart_product_form = CartAddProductForm()
@@ -107,35 +108,6 @@ class PasswordChange(DataMixin, PasswordChangeView):
         return dict(list(context.items()) + list(c_def.items()))
 
 
-'''def update_user(request):
-    print(*UserProfile.objects.all())
-    try:
-        user_profile = UserProfile.objects.get(user_id=request.user.id)
-    except UserProfile.DoesNotExist:
-        return HttpResponse("invalid user_profile!")
-
-    if request.method == "POST":
-        update_user_form = UserForm2(data=request.POST, instance=request.user)
-        update_profile_form = UserProfileForm(data=request.POST, instance=user_profile)
-
-        if update_user_form.is_valid() and update_profile_form.is_valid():
-            user = update_user_form.save()
-            profile = update_profile_form.save(commit=False)
-            profile.user = user
-            profile.avatar = request.FILES['avatar']
-
-            profile.save()
-            return redirect('cabinet')
-        else:
-            print(update_user_form.errors, update_profile_form.errors)
-    else:
-        update_user_form = UserForm2(instance=request.user)
-        update_profile_form = UserProfileForm(instance=user_profile)
-
-    return render(request, 'edit_profile.html',
-                  {'update_user_form': update_user_form, 'update_profile_form': update_profile_form})'''
-
-
 @login_required
 def update_user(request):
     if request.method == 'POST':
@@ -191,7 +163,7 @@ def product_detail(request, product_slug):
         item['update_quantity_form'] = CartAddProductForm(initial={'quantity': item['quantity'], 'update': True})
     return render(request, 'forproducts.html', {'product': product,
                                                 'cart_product_form': cart_product_form, 'cart': cart,
-                                                'rating': round(rating, 1)})
+                                                'rating': round(rating, 1), 'review': len(review)})
 
 
 class Search(DataMixin, ListView):
@@ -204,7 +176,8 @@ class Search(DataMixin, ListView):
 
     def get_queryset(self):
         search = Product.objects.filter(Q(name__icontains=self.request.GET.get("search-prod")) | Q(
-            content__icontains=self.request.GET.get("search-prod")))
+            content__icontains=self.request.GET.get("search-prod"))).annotate(
+            rating=Avg('comment__rating'))
 
         if len(search) == 0:
             return ' '
@@ -231,12 +204,14 @@ class FilterProduct(DataMixin, ListView):
         price_from = self.request.GET.get('price_from', 0)
         price_to = self.request.GET.get('price_to', 256000)
         ordering = self.request.GET.get('ordering', '-cost')
+        ordering_rate = self.request.GET.get('ordering_rate', '-cost')
         manufactured = [manuf.manufactured for manuf in
                         Product.objects.filter(is_published=True, cat__slug=self.kwargs['cat_slug'])]
         brand = self.request.GET.getlist('brand', manufactured)
         prod = Product.objects.filter(is_published=True, cat__slug=self.kwargs['cat_slug'],
                                       manufactured__in=brand).filter(
-            cost__gte=price_from).filter(cost__lte=price_to).order_by(ordering)
+            cost__gte=price_from).filter(cost__lte=price_to).annotate(
+            rating=Avg('comment__rating')).order_by(ordering)
         if len(prod) == 0:
             return ' '
         else:
@@ -296,6 +271,26 @@ def comments(request, product_slug):
         cart_prod_form = CartAddProductForm()
         form_comment = CommentForm
         comment = Comment.objects.filter(product__slug=product.slug)
-        return render(request, 'comments.html',
-                      {'product': product, "cart_prod_form": cart_prod_form, "form_comment": form_comment,
-                       'comment': comment})
+        context = {'product': product,
+                   "cart_prod_form": cart_prod_form,
+                   "form_comment": form_comment,
+                   'comment': comment
+                   }
+        return render(request, 'comments.html', context)
+
+
+def home(request):
+    product = Product.objects.filter(is_published=True).annotate(rating=Avg('comment__rating'),
+                                                                 comments=Count('comment__comment')) \
+        .order_by('-comments', '-rating')
+    categories = {cat.cat.name: cat.cat.slug for cat in product}
+    cat_prod = {}
+    for category, slug in categories.items():
+        for prod in product:
+            if prod.cat.slug == slug:
+                try:
+                    cat_prod[category, slug].append(prod)
+                except KeyError:
+                    cat_prod[category, slug] = [prod]
+
+    return render(request, 'home.html', {'product': product, 'categories': categories, 'cat_prod': cat_prod})

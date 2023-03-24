@@ -9,7 +9,7 @@
                 {% block all_about %}
                     <p class="not-active"><a href="{% url 'product' product.slug %}" class="color-comment">Все про
                         товар</a></p>
-                    <p class="not-active active">Відгуки</p>
+                    <p class="not-active active">Відгуки({{ comment|length }})</p>
                 {% endblock %}
             </div>
         </div>
